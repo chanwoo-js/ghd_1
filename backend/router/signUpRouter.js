@@ -20,7 +20,7 @@ router.post("/",(req, res)=>{
         }else {
             // passowrd 암호화까지 성공 했을 경우
             user.push(hashedPassword)
-            const q = "INSERT INTO ghd.user (`user_id`, `password`, `name`, `phone_number`, `email`, `hashedPassword`) VALUES (?)";
+            const q = "INSERT INTO user (`user_id`, `password`, `name`, `phone_number`, `email`, `hashedPassword`) VALUES (?)";
             db.query(q,[user],(err, data)=>{
                 if(err){
                     console.log(err,"query err")
@@ -36,7 +36,7 @@ router.post("/",(req, res)=>{
 // id 중복확인
 router.post("/IdCheck",(req, res)=>{
     const user_id = req.body.user_id;
-    const q = "SELECT * FROM ghd.user WHERE user_id = ?";
+    const q = "SELECT * FROM user WHERE user_id = ?";
     db.query(q, [user_id], (err, data) => {
         if (err) {
             res.json(err);
