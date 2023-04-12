@@ -6,6 +6,7 @@ const db = mysql.createConnection({
     user:"bf2ce2930817a6",
     password:"becaabba",
     database:"heroku_1c1d9fde0d345ed",
+    connectTimeout: 10000,
 })
 
 db.connect((err) => {
