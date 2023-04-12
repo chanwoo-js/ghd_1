@@ -58,7 +58,7 @@ router.post("/board/:id/edit/write", (req, res) => {
 // 공지사항 쓰기
 router.post("/write",(req, res) => {
     const { title, author, admin ,text_area} = req.body;
-    const q = `INSERT INTO ghd.notice_board (title, author, admin, text_area) VALUES (?, ?, ?, ?)`;
+    const q = `INSERT INTO notice_board (title, author, admin, text_area) VALUES (?, ?, ?, ?)`;
     db.query(q,[title, author, admin, text_area],(error, data) => {
         if (error) {
             console.error(error);

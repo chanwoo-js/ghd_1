@@ -19,7 +19,7 @@ router.post("/", (req, res, next) => {
         res.json(false);
     } else {
         // 정규식, 유효성 다 맞다면
-        const q = "SELECT * FROM ghd.user WHERE user_id = ?";
+        const q = "SELECT * FROM user WHERE user_id = ?";
         db.query(q, [userId], (err, data) => {
             if (data.length === 0) {
                 // 아이디가 없다면

@@ -59,7 +59,7 @@ router.post("/board/:id/edit/write", (req, res) => {
 router.post("/write",(req, res) => {
     const { title, author, admin, userId, text_area } = req.body;
     console.log( title, author, admin, userId, text_area)
-    const q = `INSERT INTO ghd.inquiry_board (title, author, admin, user_id, text_area) VALUES (?, ?, ?, ?, ?)`;
+    const q = `INSERT INTO inquiry_board (title, author, admin, user_id, text_area) VALUES (?, ?, ?, ?, ?)`;
     db.query(q,[title, author, admin, userId, text_area],(error, data) => {
         if (error) {
             console.error(error);
