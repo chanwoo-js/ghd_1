@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import Map, {Marker} from 'react-map-gl';
 import {Link} from "react-router-dom";
 import "../css/swiper.css"
 import AOS from "aos";
@@ -32,6 +33,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, {Autoplay, EffectFade, Navigation, Pagination} from 'swiper';
 import 'swiper/swiper-bundle.min.css';
 SwiperCore.use([Autoplay, Pagination]);
+
+
 
 
 
@@ -124,6 +127,7 @@ const Main = (props) => {
         ul_tag.style.display = "block";
         h4_tag.style.borderBottom = "3px solid #602a19";
     };
+
     useEffect(()=>{
         AOS.init({
             duration: 1500,
@@ -154,6 +158,7 @@ const Main = (props) => {
             });
         };
     }, []);
+
     return (
         <main>
             <section>
