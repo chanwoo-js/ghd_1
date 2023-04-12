@@ -21,8 +21,8 @@ app.get("/", function (req, res){
 const mainRouter = require("./router/mainRouter");
 app.use("/main",mainRouter);
 
-const userRouter = require("./router/userRouter");
-app.use("/user",userRouter);
+// const userRouter = require("./router/userRouter");
+// app.use("/user",userRouter);
 
 const signUpRouter = require("./router/signUpRouter");
 app.use("/signUp",signUpRouter);
