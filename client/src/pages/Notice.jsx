@@ -17,7 +17,7 @@ const Notice = ({login,setLogin}) => {
         const handleNotice = async () => {
             try {
                 // http://localhost:8000/notice로 들어오면 공지사항 목록을 보여줍니다.
-                const res = await axios.get('http://localhost:8000/notice');
+                const res = await axios.get('https://ghd-1.herokuapp.com/notice');
                 const sortedData = res.data
                     .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
                     .map((item) => {
@@ -65,7 +65,7 @@ const Notice = ({login,setLogin}) => {
     const handleClick = async (id) => {
         try {
             // 조회수를 1개 증가, 선택된 게시글 보여주기
-            await axios.post(`http://localhost:8000/notice/count/${id}`);
+            await axios.post(`https://ghd-1.herokuapp.com/notice/count/${id}`);
             navigate(`/notice/board/${id}`);
         } catch (error) {
             console.error(error);

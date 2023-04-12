@@ -13,7 +13,7 @@ const NoticeWrite = ({login}) => {
         const getBoard = async () => {
             if(login[0] === 1 && login[1]){
                 try {
-                    const res = await axios.get(`http://localhost:8000/notice/board/${id}/edit`)
+                    const res = await axios.get(`https://ghd-1.herokuapp.com/notice/board/${id}/edit`)
                     const {title,text_area}=res.data[0]
                     setTitle(title)
                     setTextArea(text_area)
@@ -37,7 +37,7 @@ const NoticeWrite = ({login}) => {
             }
             try {
                 if ( login[0] === 1 && login[1] ) {
-               await axios.post(`http://localhost:8000/notice/board/${id}/edit/write`, data)
+               await axios.post(`https://ghd-1.herokuapp.com/notice/board/${id}/edit/write`, data)
                     navigate("/notice")
                 } else {
                     alert("관리자가 아니거나 또는 로그인을 해주세요")

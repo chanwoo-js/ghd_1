@@ -17,7 +17,7 @@ const Inquiry = ({login}) => {
         const handleInquiry = async () => {
             try {
                 // http://localhost:8000/inquiry로 들어오면 공지사항 목록을 보여줍니다.
-                const res = await axios.get('http://localhost:8000/inquiry');
+                const res = await axios.get('https://ghd-1.herokuapp.com/inquiry');
                 const sortedData = res.data
                     .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
                     .map((item) => {
@@ -74,7 +74,7 @@ const Inquiry = ({login}) => {
     const handleClick = async (id) => {
         try {
             // 조회수를 1개 증가, 선택된 게시글 보여주기
-            await axios.post(`http://localhost:8000/inquiry/count/${id}`);
+            await axios.post(`https://ghd-1.herokuapp.com/inquiry/count/${id}`);
             navigate(`/inquiry/board/${id}`);
         } catch (error) {
             console.error(error);

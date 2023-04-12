@@ -28,7 +28,7 @@ const SignUp = (props) => {
             user_id: userId[0]
         }
         try {
-            const res = await  axios.post("http://localhost:8000/signUp/IdCheck", info)
+            const res = await  axios.post("https://ghd-1.herokuapp.com/signUp/IdCheck", info)
             setUserCheckDuplicateId(res.data);
             if (res.data) {
                 alert("사용 가능한 아이디 입니다.")
@@ -85,7 +85,7 @@ const SignUp = (props) => {
                 email: email[0],
             };
             try {
-                const res = await axios.post("http://localhost:8000/signUp", info)
+                const res = await axios.post("https://ghd-1.herokuapp.com/signUp", info)
                 if (res.data){
                     navigate('/signUp/signUpComplete');
                 }

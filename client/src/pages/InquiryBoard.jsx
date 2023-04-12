@@ -22,7 +22,7 @@ const InquiryBoard = ({ login }) => {
                 setDecoded(decoded);
             }
             try {
-                const res = await axios.get(`http://localhost:8000/inquiry/board/${id}`);
+                const res = await axios.get(`https://ghd-1.herokuapp.com/inquiry/board/${id}`);
                 setData(res.data[0]);
             } catch (error) {
                 console.log(error);
@@ -33,7 +33,7 @@ const InquiryBoard = ({ login }) => {
     const deleteBoard = async () => {
         // 게시글 삭제
         try {
-            await axios.post(`http://localhost:8000/inquiry/board/${id}/delete`);
+            await axios.post(`https://ghd-1.herokuapp.com/inquiry/board/${id}/delete`);
             navigate("/inquiry")
         }catch (error) {
             console.log(error)
