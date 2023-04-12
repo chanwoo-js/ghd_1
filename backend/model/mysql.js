@@ -1,6 +1,7 @@
 const mysql = require("mysql");
 
-const db = mysql.createConnection({
+const db = mysql.createPool({
+    connectionLimit: 10,
     host:"us-cdbr-east-06.cleardb.net",
     port:"3306",
     user:"bf2ce2930817a6",
@@ -9,12 +10,12 @@ const db = mysql.createConnection({
     connectTimeout: 10000,
 })
 
-db.connect((err) => {
+db.getConnection((err,connection) => {
     if (err) {
         console.error('error connecting: ' + err.stack);
         return;
     }
-    console.log('connected as id ' + db.threadId);
+    console.log('connected as id ' + connection.threadId);
 });
 
 module.exports = db
