@@ -1,0 +1,21 @@
+.header {position: fixed; top: 0; left: 0; right: 0; width: 100%; z-index: 1000;  background-color: rgba(250,250,250, 1);}
+.header.active {box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);}
+
+.header_contain { position: relative; width: 1300px; height: 90px; margin: auto;}
+
+.logo { position: absolute; top: 0; left: 0; width: 100px; height: 75px; margin-top: 10px;}
+.logo > a {width: inherit; height: inherit;}
+.logo > a > img { display: inline-block; width: inherit; height: inherit; object-fit: cover; object-position: center}
+
+.gnb {width: 800px; margin-left: 210px;}
+.gnb > ul {text-align: center; font-size: 0; }
+.gnb > ul > li {display: inline-block;  font-size: 16px;}
+.gnb > ul > li > a {width: 160px; height:90px; line-height: 90px; text-align: center; font-size: 16px; font-weight: 500;}
+
+
+.header_right {position: absolute; top: 0; right: 0; font-size: 0;}
+.header_right > li {display: inline-block; font-size: 16px; font-weight: 600; width: 100px; height: 90px; line-height: 90px;}
+.header_right > li  button {font-size: 16px; font-weight: 500; width: 100px; height: 90px; line-height: 90px;}
+.header_right > li > a {font-weight: 500; width: 100px; text-align: center}
+
+

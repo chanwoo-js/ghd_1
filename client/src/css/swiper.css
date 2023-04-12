@@ -1,0 +1,17 @@
+.swiper-button-prev:before,.swiper-button-next:before {
+    font-family: fontawesome, serif;
+    color : white;
+    width : 80px;
+    height : 80px;
+    line-height : 80px;
+    text-align : center;
+    font-size: 50px;
+    position : absolute;
+    top: 45%;
+}
+.swiper-button-prev:after{display: none;}
+.swiper-button-prev:before {content : "\f0d9"; left: 0;}
+.swiper-button-next:after {display: none;}
+.swiper-button-next:before {content : "\f0da"; right: 0;}
+.swiper-pagination-bullet {width: 30px!important;border-radius: 5px!important;}
+.swiper-pagination-bullet.swiper-pagination-bullet-active{ background-color: black}

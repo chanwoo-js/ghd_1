@@ -1,0 +1,12 @@
+.footer {background-color: #232323;}
+.footer_contain {width: 1300px; margin: 0 auto; text-align: center; font-size: 0; padding: 50px 0;}
+
+
+.footer_left {width: 150px; height: 150px; line-height: 150px; border-radius: 50%; background-color: white; display: inline-block; font-size: 16px; vertical-align: top; margin-right: 150px;}
+.footer_left a {width: 120px; height: 100px; vertical-align: middle;}
+.footer_left img {width: inherit; height: inherit; object-position: center; object-fit: cover;}
+
+.footer_right {display: inline-block; font-size: 14px; color: white; line-height: 2.2em; text-align: start}
+.footer_right h2 {display: inline-block; color:beige;}
+
+.company_name {font-size: 24px; font-weight: bold;}

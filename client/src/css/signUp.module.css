@@ -1,0 +1,31 @@
+.signUp {padding: 150px 0 ;}
+.signUp_contain {width: 1300px; margin: auto; }
+.signUp_contain legend { padding: 30px 10px;}
+.signUp_contain h2 {font-size: 28px; padding: 30px 0 10px 0}
+.signUp_contain form {padding-left: 30px;}
+
+/* ########### 공통*/
+.signUp_contain div  {line-height: 50px; border-bottom: 1px solid gainsboro; padding: 0 0 40px;}
+.signUp_contain div:nth-child(5) {border: none;}
+.signUp_contain div > label {display: block; position: relative}
+.signUp_contain div > label::after {
+    content: "*";
+    position: absolute;
+    color: red;
+}
+.signUp_contain div > input { line-height: 50px; width: 350px; padding: 0 10px; }
+
+/*############ 아이디*/
+.id_contain button {margin-left: 10px; line-height: 50px; width: 100px; border: 1px solid gainsboro}
+
+/*############ 비밀번호*/
+.password_contain input:nth-child(2){display: block;  margin-bottom: 10px;}
+
+/*############ 이름*/
+.name_contain input{font-size: 18px}
+
+/*############ 핸드폰 번호*/
+
+/*############ 가입하기 버튼*/
+.signUp_button_contain {text-align: center;}
+.signUp_button {font-size: 18px; border: 1px solid gainsboro; padding: 20px 50px;}
