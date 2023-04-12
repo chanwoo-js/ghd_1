@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "heroku-prebuild": "cd client && npm ci && npm run build && mv build ../server",
-    "start" : "cd server && npm ci && node app.js",
+    "heroku-prebuild": "cd client && npm ci && npm run build && mv build ../backend",
+    "start" : "cd backend && npm ci && node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
