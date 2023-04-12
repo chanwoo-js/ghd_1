@@ -31,7 +31,7 @@ import articleInfoSliderImg4 from "../image/archives/archive_8.jpg"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, {Autoplay, EffectFade, Navigation, Pagination} from 'swiper';
 import 'swiper/swiper-bundle.min.css';
-import { Map, MapMarker } from "react-kakao-maps";
+import { Map, MapMarker } from "react-kakao-maps-sdk";
 SwiperCore.use([Autoplay, Pagination]);
 
 
