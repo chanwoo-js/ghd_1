@@ -38,6 +38,7 @@ function App() {
                 <PageTop/>
                 <Routes>
                     <Route path={"/"} element={<Main/>}></Route>
+                    <Route path={"/*"} element={<PageNotFound/>}></Route>
                     <Route path={"/notice"} element={<Notice login={login}/>}></Route>
                     <Route path={"/notice/write"} element={<NoticeWrite login={login}/>}></Route>
                     <Route path={"/notice/board/:id"} element={<NoticeBoard login={login}/>}></Route>
@@ -52,7 +53,6 @@ function App() {
                     <Route path={"/signUp"} element={<SignUp/>}></Route>
                     <Route path={"/signUp/signUpComplete"} element={<SignUpComplete/>}></Route>
                     <Route path={"/user"} element={<User/>}></Route>
-                    <Route path={"*"} element={<PageNotFound/>}></Route>
                 </Routes>
                 <Footer/>
             </BrowserRouter>
