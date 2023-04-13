@@ -33,12 +33,11 @@ function App() {
 
     return (
         <div className="App">
-            <BrowserRouter basename={"/"}>
+            <BrowserRouter>
                 <Header login={login} setLogin={setLogin} />
                 <PageTop/>
                 <Routes>
                     <Route path={"/"} element={<Main/>}></Route>
-                    <Route path={"/*"} element={<PageNotFound/>}></Route>
                     <Route path={"/notice"} element={<Notice login={login}/>}></Route>
                     <Route path={"/notice/write"} element={<NoticeWrite login={login}/>}></Route>
                     <Route path={"/notice/board/:id"} element={<NoticeBoard login={login}/>}></Route>

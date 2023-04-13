@@ -1,21 +1,16 @@
 const express = require("express");
 const cors = require("cors");
-const app = express();
 const cookieParser = require("cookie-parser");
-const PORT = process.env.PORT || 8000;
-
 const mainRouter = require("./router/mainRouter");
 const signUpRouter = require("./router/signUpRouter");
 const loginRouter = require("./router/loginRouter");
 const noticeRouter = require("./router/noticeRouter");
 const inquiryRouter = require("./router/inquiryRouter");
+const app = express();
+const PORT = process.env.PORT || 8000;
 
 app.use((req, res, next) => {
     res.setHeader('Cache-Control', 'public, max-age=86400');
-    next();
-});
-app.use((req, res, next) => {
-    res.status(404).sendFile(__dirname +"/build/404.html")
     next();
 });
 app.use(express.json());
@@ -25,7 +20,7 @@ app.use(cookieParser());
 
 // 이폴더는 맘대로 꺼내가도 된다.
 app.use(express.static("build"))
-app.get("/", function (req, res){
+app.get("*", function (req, res){
     res.sendFile(__dirname +"/build/index.html")
 })
 
