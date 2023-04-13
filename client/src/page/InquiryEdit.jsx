@@ -17,7 +17,7 @@ const InquiryEdit = ({login}) => {
         const getBoard = async () => {
             if(login[0] === 0 && login[1]){
                 try {
-                    const res = await axios.get(`https://ghd-1.herokuapp.com/api/inquiry/board/${id}/edit`)
+                    const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/inquiry/board/${id}/edit`)
                     const {title,text_area,user_id}=res.data[0]
                     setTitle(title)
                     setTextArea(text_area)
@@ -45,7 +45,7 @@ const InquiryEdit = ({login}) => {
             }
             try {
                 if (decoded.isAdmin === 0 && login[0] === 0 && login[1] && decoded.userId === userId ) {
-                    await axios.post(`https://ghd-1.herokuapp.com/api/inquiry/board/${id}/edit/write`, data)
+                    await axios.post(`${process.env.REACT_APP_API_URL}/api/inquiry/board/${id}/edit/write`, data)
                     navigate("/inquiry")
                 } else {
                     alert("관리자가 아니거나 또는 로그인을 해주세요")

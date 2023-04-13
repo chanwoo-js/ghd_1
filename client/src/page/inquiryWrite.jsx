@@ -33,7 +33,7 @@ const InquiryWrite = ({login}) => {
             console.log(decoded.userId);
             try {
                 if (decoded.isAdmin === 0 && login[0] === 0 && login[1]) {
-                    await axios.post("https://ghd-1.herokuapp.com/api/inquiry/write", data);
+                    await axios.post(`${process.env.REACT_APP_API_URL}/api/inquiry/write`, data);
                     navigate("/inquiry");
                 } else {
                     alert("로그인을 해주세요");

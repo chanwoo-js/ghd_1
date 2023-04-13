@@ -31,7 +31,7 @@ const Login = ({setLogin}) => {
                 password: password[0]
             };
             try {
-                const res = await axios.post("https://ghd-1.herokuapp.com/api/login", info)
+                const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/login`, info)
                 const token = res.data.token;
                 // console.log(token)
                 // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJja3NkbmdoIiwiaXNBZG1pbiI6MSwiaWF0IjoxNjgwNTkwMTM2LCJleHAiOjE2ODA1OTczMzZ9.jbDWer2LCodbgJ6WNtCuxegcyvWdEt2ASFMuijLK8XE

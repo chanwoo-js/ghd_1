@@ -16,7 +16,7 @@ const Inquiry = ({login}) => {
     useEffect(()=>{
         const handleInquiry = async () => {
             try {
-                const res = await axios.get('https://ghd-1.herokuapp.com/api/inquiry');
+                const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/inquiry`);
                 const sortedData = res.data
                     .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
                     .map((item) => {
@@ -73,7 +73,7 @@ const Inquiry = ({login}) => {
     const handleClick = async (id) => {
         try {
             // 조회수를 1개 증가, 선택된 게시글 보여주기
-            await axios.post(`https://ghd-1.herokuapp.com/api/inquiry/count/${id}`);
+            await axios.post(`${process.env.REACT_APP_API_URL}/api/inquiry/count/${id}`);
             navigate(`/inquiry/board/${id}`);
         } catch (error) {
             console.error(error);

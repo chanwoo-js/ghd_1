@@ -25,7 +25,7 @@ const NoticeWrite = ({login}) => {
             }
             try {
                 if (decoded.isAdmin === 1 && login[0] === 1 && login[1] && decoded.name === "관리자") {
-                    await axios.post("https://ghd-1.herokuapp.com/api/notice/write", data)
+                    await axios.post(`${process.env.REACT_APP_API_URL}/api/notice/write`, data)
                     navigate("/notice")
                 } else {
                     alert("관리자가 아니거나 또는 로그인을 해주세요")

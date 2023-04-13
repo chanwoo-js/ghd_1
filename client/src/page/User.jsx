@@ -7,7 +7,7 @@ const User = (props) => {
     useEffect(()=>{
         const fetchAllUser = async()=>{
             try{
-                const data = (await axios.get("https://ghd-1.herokuapp.com/api/User")).data
+                const data = (await axios.get(`${process.env.REACT_APP_API_URL}/api/User`)).data
                 console.log(data)
                 setUser(data)
             }catch(err){
@@ -20,7 +20,7 @@ const User = (props) => {
     // 삭제하는 핸들러
     const handleDelete = async (user_id) => {
         try {
-            await axios.delete("https://ghd-1.herokuapp.com/api/user/"+user_id);
+            await axios.delete(`${process.env.REACT_APP_API_URL}/api/user/`+user_id);
             window.location.reload();
 
         }catch (err) {
