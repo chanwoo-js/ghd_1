@@ -17,6 +17,7 @@ const Inquiry = ({login}) => {
         const handleInquiry = async () => {
             try {
                 const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/inquiry`);
+                console.log(res);
                 const sortedData = res.data
                     .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
                     .map((item) => {
