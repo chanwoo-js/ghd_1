@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const cookieParser = require("cookie-parser");
-const serveStatic = require("serve-static");
 const PORT = process.env.PORT || 8000;
 
 app.use((req, res, next) => {
@@ -15,7 +14,10 @@ app.use(cors());
 app.use(cookieParser());
 
 // 이폴더는 맘대로 꺼내가도 된다.
-app.use(serveStatic("build"));
+app.use(express.static("build"))
+app.use((req, res, next) => {
+    res.status(404).sendFile(__dirname + "/build/index.html");
+});
 app.get("/", function (req, res){
     res.sendFile(__dirname +"/build/index.html")
 })
