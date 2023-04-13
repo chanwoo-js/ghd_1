@@ -24,7 +24,6 @@ const InquiryBoard = ({ login }) => {
             try {
                 const res = await axios.get(`https://ghd-1.herokuapp.com/api/inquiry/board/${id}`);
                 setData(res.data[0]);
-                console.log(res.data[0])
             } catch (error) {
                 console.log(error);
             }

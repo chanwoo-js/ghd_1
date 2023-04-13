@@ -25,6 +25,7 @@ router.get("/board/:id", (req, res) => {
             console.error(error);
         } else {
             res.json(data);
+            console.log(data);
         }
     });
 });
