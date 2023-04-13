@@ -19,11 +19,10 @@ import InquiryWrite from "./page/inquiryWrite";
 import InquiryBoard from "./page/InquiryBoard";
 import InquiryEdit from "./page/InquiryEdit";
 import {signUpIdCheck} from "./hook/signUpIdCheck";
-import PageNotFound from "./page/PageNotFound";
-import {Switch} from "antd";
 
 
 function App() {
+
     const [login, setLogin] = useState([0, false]); // isAdmin, isLoggedIn
 
     useEffect(() => {
@@ -37,24 +36,22 @@ function App() {
                 <Header login={login} setLogin={setLogin} />
                 <PageTop/>
                 <Routes>
-                    <Switch>
-                        <Route path={"/"} element={<Main/>}></Route>
-                        <Route path={"/notice"} element={<Notice login={login}/>}></Route>
-                        <Route path={"/notice/write"} element={<NoticeWrite login={login}/>}></Route>
-                        <Route path={"/notice/board/:id"} element={<NoticeBoard login={login}/>}></Route>
-                        <Route path={"/notice/board/:id/edit"} element={<NoticeEdit login={login}/>}></Route>
-                        <Route path={"/roomInfo"} element={<RoomInfo/>}></Route>
-                        <Route path={"/reservationStatus"} element={<ReservationStatus/>}></Route>
-                        <Route path={"/inquiry"} element={<Inquiry login={login}/>}></Route>
-                        <Route path={"/inquiry/write"} element={<InquiryWrite login={login}/>}></Route>
-                        <Route path={"/inquiry/board/:id"} element={<InquiryBoard login={login}/>}></Route>
-                        <Route path={"/inquiry/board/:id/edit"} element={<InquiryEdit login={login}/>}></Route>
-                        <Route path={"/login"} element={<Login setLogin={setLogin}/>}></Route>
-                        <Route path={"/signUp"} element={<SignUp/>}></Route>
-                        <Route path={"/signUp/signUpComplete"} element={<SignUpComplete/>}></Route>
-                        <Route path={"/user"} element={<User/>}></Route>
-                        <Route element={<PageNotFound/>}></Route>
-                    </Switch>
+                    <Route path={"/"} element={<Main/>}></Route>
+                    <Route path={"/notice"} element={<Notice login={login}/>}></Route>
+                    <Route path={"/notice/write"} element={<NoticeWrite login={login}/>}></Route>
+                    <Route path={"/notice/board/:id"} element={<NoticeBoard login={login}/>}></Route>
+                    <Route path={"/notice/board/:id/edit"} element={<NoticeEdit login={login}/>}></Route>
+                    <Route path={"/roomInfo"} element={<RoomInfo/>}></Route>
+                    <Route path={"/reservationStatus"} element={<ReservationStatus/>}></Route>
+                    <Route path={"/inquiry"} element={<Inquiry login={login}/>}></Route>
+                    <Route path={"/inquiry/write"} element={<InquiryWrite login={login}/>}></Route>
+                    <Route path={"/inquiry/board/:id"} element={<InquiryBoard login={login}/>}></Route>
+                    <Route path={"/inquiry/board/:id/edit"} element={<InquiryEdit login={login}/>}></Route>
+                    <Route path={"/login"} element={<Login setLogin={setLogin}/>}></Route>
+                    <Route path={"/signUp"} element={<SignUp/>}></Route>
+                    <Route path={"/signUp/signUpComplete"} element={<SignUpComplete/>}></Route>
+                    <Route path={"/user"} element={<User/>}></Route>
+                    <Route path="/*" element={<Navigate replace to="/"/>} />
                 </Routes>
                 <Footer/>
             </BrowserRouter>
