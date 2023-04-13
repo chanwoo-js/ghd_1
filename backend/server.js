@@ -1,18 +1,15 @@
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const app = express();
+const PORT = process.env.PORT || 8000;
+
 const mainRouter = require("./router/mainRouter");
 const signUpRouter = require("./router/signUpRouter");
 const loginRouter = require("./router/loginRouter");
 const noticeRouter = require("./router/noticeRouter");
 const inquiryRouter = require("./router/inquiryRouter");
-const app = express();
-const PORT = process.env.PORT || 8000;
 
-app.use((req, res, next) => {
-    res.setHeader('Cache-Control', 'public, max-age=86400');
-    next();
-});
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors());
