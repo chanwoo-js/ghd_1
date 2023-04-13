@@ -14,7 +14,8 @@ const Inquiry = ({login}) => {
     const navigate = useNavigate();
     // 마운트시 db 글 가져오기
     useEffect(()=>{
-        const handleInquiry = async () => {
+        const handleInquiry = async (e) => {
+            e.preventDefault();
             try {
                 const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/inquiry`);
                 console.log(res);
@@ -37,7 +38,7 @@ const Inquiry = ({login}) => {
                 console.error(error);
             }
         };
-        handleInquiry();
+       handleInquiry();
     },[]);
 
 

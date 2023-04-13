@@ -19,7 +19,6 @@ import InquiryWrite from "./page/inquiryWrite";
 import InquiryBoard from "./page/InquiryBoard";
 import InquiryEdit from "./page/InquiryEdit";
 import {signUpIdCheck} from "./hook/signUpIdCheck";
-import PageNotFound from "./page/PageNotFound";
 
 
 function App() {
