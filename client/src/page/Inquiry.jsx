@@ -14,11 +14,15 @@ const Inquiry = ({login}) => {
     const navigate = useNavigate();
     // 마운트시 db 글 가져오기
     useEffect(()=>{
-        const handleInquiry = async (e) => {
-            e.preventDefault();
+        const handleInquiry = async () => {
             try {
-                const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/inquiry`);
-                console.log(res);
+                const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/inquiry`, {
+                    headers: {
+                        'Cache-Control': 'no-cache, no-store, must-revalidate',
+                        'Pragma': 'no-cache',
+                        'Expires': '0',
+                    },
+                });
                 const sortedData = res.data
                     .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
                     .map((item) => {
@@ -38,7 +42,7 @@ const Inquiry = ({login}) => {
                 console.error(error);
             }
         };
-       handleInquiry();
+        handleInquiry();
     },[]);
 
 
