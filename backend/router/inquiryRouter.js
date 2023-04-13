@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const db = require("../model/mysql");
 
-// http://localhost:8000/inquiry로 들어오면 문의 게시판 목록을 보여줍니다.
 router.get("/",(req, res) => {
     // const q = "SELECT * FROM ghd.notice_board";
     const q = "SELECT id, title, author, created_at, count, admin FROM inquiry_board";
@@ -15,7 +14,6 @@ router.get("/",(req, res) => {
         }
     });
 })
-
 // 선택된 게시글 보여주기
 router.get("/board/:id", (req, res) => {
     const { id } = req.params;
@@ -29,7 +27,6 @@ router.get("/board/:id", (req, res) => {
         }
     });
 });
-
 // 선택된 게시글 수정하기 눌렀을때 기존 정보 가지고 오기
 router.get("/board/:id/edit", (req, res) => {
     const { id } = req.params;
