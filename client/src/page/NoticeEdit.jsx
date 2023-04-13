@@ -1,56 +1,61 @@
-import React, {useState} from 'react';
-import style from "../css/inquiryWrite.module.css"
+import React, {useEffect, useState} from 'react';
+import style from "../css/noticeWrite.module.css"
 import axios from "axios";
-import jwt_decode from "jwt-decode";
-import {getLocalStorageToken} from "../hook/useLoginout";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
-const InquiryWrite = ({login}) => {
+const NoticeWrite = ({login}) => {
     const [title, setTitle] = useState("");
     const [textArea, setTextArea] = useState("");
     const navigate = useNavigate();
+    const { id } = useParams(); // URL에서 ID 값을 가져옵니다.
 
-    const handleSubmit = async (e) => {
+    useEffect(()=>{
+        const getBoard = async () => {
+            if(login[0] === 1 && login[1]){
+                try {
+                    const res = await axios.get(`https://ghd-1.herokuapp.com/api/notice/board/${id}/edit`)
+                    const {title,text_area}=res.data[0]
+                    setTitle(title)
+                    setTextArea(text_area)
+                }catch (error){
+                    console.log(error)
+                }
+            }
+        }
+        getBoard();
+    },[id, login])
+
+
+    const handleSubmit = async(e) => {
         e.preventDefault();
         if (!title || !textArea) {
             alert("제목과 내용을 모두 입력해주세요.");
-        } else {
-            const token = getLocalStorageToken("token");
-            // 토큰이 존재하고 유효한 형식인지 확인합니다.
-            if (!token || token.split(".").length !== 3) {
-                alert("유효하지 않은 토큰입니다.");
-                return;
-            }
-            const decoded = jwt_decode(token);
-            console.log(decoded)
+        }else {
             const data = {
                 title: title,
-                author: decoded.name,
-                userId: decoded.userId,
-                admin: decoded.isAdmin,
-                text_area: textArea,
-            };
-            console.log(decoded.userId);
+                text_area: textArea
+            }
             try {
-                if (decoded.isAdmin === 0 && login[0] === 0 && login[1]) {
-                    await axios.post("https://ghd-1.herokuapp.com/inquiry/write", data);
-                    navigate("/inquiry");
+                if ( login[0] === 1 && login[1] ) {
+               await axios.post(`https://ghd-1.herokuapp.com/api/notice/board/${id}/edit/write`, data)
+                    navigate("/notice")
                 } else {
-                    alert("로그인을 해주세요");
+                    alert("관리자가 아니거나 또는 로그인을 해주세요")
                 }
             } catch (err) {
-                console.log(err);
+                console.log(err)
             }
         }
+
     };
     const handleBack = () => {
-        navigate("/inquiry")
+        navigate("/notice")
     }
 
     return (
         <section>
             <div className={style.write_contain}>
-                <h2>문의 게시판</h2>
+                <h2>공지사항</h2>
                 <form onSubmit={handleSubmit}>
                     <input
                         type="text"
@@ -70,7 +75,7 @@ const InquiryWrite = ({login}) => {
                         required
                     ></textarea>
                     <div className={style.button}>
-                        <button type="submit">등록</button>
+                        <button type="submit">수정</button>
                         <button type="button" onClick={handleBack}>돌아가기</button>
                     </div>
                 </form>
@@ -79,4 +84,4 @@ const InquiryWrite = ({login}) => {
     );
 };
 
-export default InquiryWrite;
+export default NoticeWrite;

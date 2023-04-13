@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import style from "../css/noticeWrite.module.css"
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import {getLocalStorageToken} from "../hook/useLoginout";
+import {getLocalStorage} from "../hook/getLocalStorage";
 import {useNavigate} from "react-router-dom";
 
 const NoticeWrite = ({login}) => {
@@ -15,7 +15,7 @@ const NoticeWrite = ({login}) => {
         if (!title || !textArea) {
             alert("제목과 내용을 모두 입력해주세요.");
         }else {
-            const token = getLocalStorageToken("token")
+            const token = getLocalStorage("token")
             const decoded = jwt_decode(token);
             const data = {
                 title: title,
@@ -25,7 +25,7 @@ const NoticeWrite = ({login}) => {
             }
             try {
                 if (decoded.isAdmin === 1 && login[0] === 1 && login[1] && decoded.name === "관리자") {
-                    await axios.post("https://ghd-1.herokuapp.com/notice/write", data)
+                    await axios.post("https://ghd-1.herokuapp.com/api/notice/write", data)
                     navigate("/notice")
                 } else {
                     alert("관리자가 아니거나 또는 로그인을 해주세요")

@@ -13,7 +13,7 @@ const NoticeBoard = ({ login, setLogin }) => {
         // 게시글 가져오기
         const noticeBoard = async () => {
             try {
-                const res = await axios.get(`https://ghd-1.herokuapp.com/notice/board/${id}`);
+                const res = await axios.get(`https://ghd-1.herokuapp.com/api/notice/board/${id}`);
                 setData(res.data[0]);
             } catch (error) {
                 console.error(error);
@@ -24,7 +24,7 @@ const NoticeBoard = ({ login, setLogin }) => {
     const deleteBoard = async () => {
         // 게시글 삭제
         try {
-            await axios.post(`https://ghd-1.herokuapp.com/notice/board/${id}/delete`);
+            await axios.post(`https://ghd-1.herokuapp.com/api/notice/board/${id}/delete`);
             navigate("/notice")
         }catch (error) {
             console.log(error)

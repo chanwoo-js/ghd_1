@@ -1,14 +1,9 @@
 import React, {useEffect} from 'react';
-import Map, {Marker} from 'react-map-gl';
-import {Link} from "react-router-dom";
+import {MainSlider,WithGoodHood,Sns} from "../export/components";
 import "../css/swiper.css"
 import AOS from "aos";
 import "aos/dist/aos.css"
 import style from "../css/main.module.css"
-import sliderImg1 from "../image/slider_image/slider_img_1.jpg"
-import sliderImg2 from "../image/slider_image/slider_img_2.jpg"
-import sliderImg3 from "../image/slider_image/slider_img_3.jpg"
-import sliderImg4 from "../image/slider_image/slider_img_4.jpg"
 import aRoomInfoSliderImg1 from "../image/a_room/a_1.jpg"
 import aRoomInfoSliderImg2 from "../image/a_room/a_2.jpg"
 import aRoomInfoSliderImg3 from "../image/a_room/a_3.jpg"
@@ -39,32 +34,7 @@ SwiperCore.use([Autoplay, Pagination]);
 
 
 const Main = (props) => {
-    const mainSlides = [
-        {
-            imgSrc: sliderImg1,
-            title: '더뷰',
-            description: '그 이상의 공간을 보여주다',
-            tags: ['#친환경', '#감각적 디자인', '#우드'],
-        },
-        {
-            imgSrc: sliderImg2,
-            title: '모던',
-            description: '라이프 스타일이 담긴 공간',
-            tags: ['#모던', '#친환경', '#심플컬러'],
-        },
-        {
-            imgSrc: sliderImg3,
-            title: '더홈',
-            description: '깔끔한 스타일링',
-            tags: ['#프리미엄', '#친환경', '#깔끔한 디자인'],
-        },
-        {
-            imgSrc: sliderImg4,
-            title: '이룸',
-            description: '나만의 공간을 이루다',
-            tags: ['#프리미엄', '#친환경', '#실크벽지'],
-        },
-    ];
+
     const RoomInfo = {
         aRoom: {
             imgSrc: [aRoomInfoSliderImg1, aRoomInfoSliderImg2, aRoomInfoSliderImg3, aRoomInfoSliderImg4]
@@ -83,13 +53,8 @@ const Main = (props) => {
         },
 
     };
-    const withGoodhoodAbove = [
-        "09WOMEN", "A_PIECE_OF_CAKE", "ABIB", "ABIB_2", "AGINGCCC", "A-IN", "AYA_MORIE", "BASE_MOMENT", "BEYD", "BEYOUND_CLOSET", "BINARY01", "BLUE_POPS", "BLUV", "DOUBLE_QUOTES", "E_Z_B_Z", "FOYER", "FOYER_2", "GROOMING_NOTE", "HEIDMODE", "HEYMARS", "HYOON", "IN_SILENCE", "IST_KUNST", "ISTKUNST", "JUSTFORME", "LE2", "LLUD", "LOY_ACOL", "MARYMOND", "MFNT", "MILKYSTORE", "MILLO"
-    ]
-    const withGoodhoodBelow = [
-        "MILLO_2", "MILLO_3", "MINAV", "MINSUN", "MINSUN2", "MOLPIN", "MOONAN", "MOTIFAN", "MOZZIYU", "NAMEZ", "NAMING", "NAMING_2", "NAMING_3", "NEWBIE", "NEXT_WEEK", "NIGHT_FLOW", "NOIRROOM", "NONCODE", "NONCODE_2", "NONCODE_3", "PAGED", "PAVEMENT", "PAVEMENT_2", "PURPLEFLOWERS", "REVE", "SEA_WAVE", "SEARCH_410", "SHEZGOOD", "SHOP_VAIL", "SPLEMU", "THDAM_SEOUL", "VETIANO", "VIVASTUDIO", "YOURMAGAZINE"
-    ]
-    const sns = ["sns1", "sns2", "sns3", "sns4", "sns5", "sns6", "sns7", "sns8"];
+
+
     const card = [
         {
             card1 : {
@@ -135,7 +100,7 @@ const Main = (props) => {
     })
     useEffect(() => {
         const script = document.createElement('script');
-        script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${"4fe8cebc3e285957df6d8766ede9a0d3"}&autoload=false`;
+        script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${'4fe8cebc3e285957df6d8766ede9a0d3'}&autoload=false`;
         document.head.appendChild(script);
 
         script.onload = () => {
@@ -161,45 +126,7 @@ const Main = (props) => {
 
     return (
         <main>
-            <section>
-                <div className={style.main_slider_container}>
-                    <Swiper
-                        modules={[Navigation, EffectFade, Pagination,Autoplay]}
-                        navigation={{
-                            nextEl: '.swiper-button-next',
-                            prevEl: '.swiper-button-prev',
-                        }}
-                        effect={"fade"}
-                        speed={1100}
-                        autoplay={{
-                            delay: 3000,
-                            disableOnInteraction: false,
-                        }}
-                        pagination={{
-                            type: 'bullets',
-                            clickable: true,
-                        }}
-                        loop={true}
-                    >
-                        {mainSlides.map((slide,index ) => (
-                            <SwiperSlide key={index}>
-                                <img src={slide.imgSrc} alt="" />
-                                <div className={style.text_box}>
-                                    <div>
-                                        <h2>{slide.title}</h2>
-                                        <p>{slide.description}</p>
-                                        {slide.tags.map((tag, tagIndex) => (
-                                            <span key={tagIndex}>{tag}</span>
-                                        ))}
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                        ))}
-                        <div className="swiper-button-prev"></div>
-                        <div className="swiper-button-next"></div>
-                    </Swiper>
-                </div>
-            </section>
+           <MainSlider/>
             <section className={style.room_info}>
                 <div className={`${style.studio_info_contain} studio_info_contain`}>
                     <h2>STUDIO</h2>
@@ -400,71 +327,10 @@ const Main = (props) => {
                     </div>
                 </div>
             </section>
-            <section className={style.with_ghd}>
-                <div className={style.with_ghd_contain}>
-                    <h2>with goodhood</h2>
-                    <p>굿후드스튜디오와 함게한 업체의 아카이브를 공유합니다</p>
-                    <div className={style.swiper_slide}>
-                        <Swiper
-                            modules={[ EffectFade,Autoplay]}
-                            spaceBetween={40}
-                            grabCursor={true}
-                            freeMode={true}
-                            slidesPerView={"auto"}
-                            speed={5000}
-                            autoplay={{
-                                delay: 0,
-                                disableOnInteraction: false,
-                            }}
-                            loop={true}
-                        >
-                            {withGoodhoodAbove.map((img,index)=> {
-                                return (
-                                    <SwiperSlide  key={index}>
-                                        <img src={require(`../image/with_profile/${img}.jpg`)} alt="img"/>
-                                    </SwiperSlide>
-                                )
-                            })}
-                        </Swiper>
-                    </div>
-                    <div className={style.swiper_slide}>
-                        <Swiper dir="rtl"
-                                modules={[ EffectFade,Autoplay]}
-                                spaceBetween={40}
-                                grabCursor={true}
-                                freeMode={true}
-                                slidesPerView={"auto"}
-                                speed={5000}
-                                autoplay={{
-                                    delay: 0,
-                                    disableOnInteraction: false,
-                                }}
-                                loop={true}
-                        >
-                            {withGoodhoodBelow.map((img,index)=> {
-                                return (
-                                    <SwiperSlide  key={index}>
-                                        <img src={require(`../image/with_profile/${img}.jpg`)} alt="img"/>
-                                    </SwiperSlide>
-                                )
-                            })}
-                        </Swiper>
-                    </div>
-                </div>
-            </section>
-            <section className={style.sns}>
-                <div className={style.sns_contain}>
-                    <h2>SNS</h2>
-                    <p>goodhood의 더 많은 소식을 SNS로 만나보세요</p>
-                    <div><a href="https://www.instagram.com/goodhoodstudio/">goodhoodstudio instargram 바로가기</a></div>
-                    <ul data-aos="zoom-in">
-                        {sns.map((item, index)=>{
-                            return <li key={index}><Link to=""><img src={require(`../image/sns/${item}.jpg`)} alt="img"/></Link></li>
-                        })
-                        }
-                    </ul>
-                </div>
-            </section>
+            <WithGoodHood/>
+            {/*sns*/}
+            <Sns/>
+            {/*add_info_card 3*/}
             <section className={style.add_info}>
                 <div className={style.add_info_contain}>
                     <h2>ADDITIONAL INFORMATION</h2>
@@ -490,7 +356,8 @@ const Main = (props) => {
                     </div>
                 </div>
             </section>
-            <section className={style.location}>
+            {/*location*/}
+            <section>
                 <div className={style.location_contain}>
                     <h2>LOCATION</h2>
                     <div id="map" style={{ width: '100%', height: '500px' }} />

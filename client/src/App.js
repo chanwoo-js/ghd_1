@@ -1,32 +1,31 @@
 import {useEffect, useState } from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {Header, Footer} from "./export/components"
 import "./css/reset.css";
-import Main from "./pages/Main";
-import Login from "./pages/Login";
-import SignUp from "./pages/SignUp";
-import User from "./pages/User";
-import Header from "./component/Header/Header.jsx";
-import Notice from "./pages/Notice";
-import RoomInfo from "./pages/RoomInfo";
-import ReservationStatus from "./pages/ReservationStatus";
-import Footer from "./component/Footer/Footer";
-import PageTop from "./pages/PageTop";
-import SignUpComplete from "./pages/SignUpComplete";
-import NoticeWrite from "./pages/NoticeWrite";
-import NoticeBoard from "./pages/NoticeBoard";
-import NoticeEdit from "./pages/NoticeEdit";
-import Inquiry from "./pages/Inquiry";
-import InquiryWrite from "./pages/inquiryWrite";
-import InquiryBoard from "./pages/InquiryBoard";
-import InquiryEdit from "./pages/InquiryEdit";
-import {checkLoginStatus} from "./hook/useLoginout";
+import Main from "./page/Main";
+import Login from "./page/Login";
+import SignUp from "./page/SignUp";
+import User from "./page/User";
+import Notice from "./page/Notice";
+import RoomInfo from "./page/RoomInfo";
+import ReservationStatus from "./page/ReservationStatus";
+import PageTop from "./page/PageTop";
+import SignUpComplete from "./page/SignUpComplete";
+import NoticeWrite from "./page/NoticeWrite";
+import NoticeBoard from "./page/NoticeBoard";
+import NoticeEdit from "./page/NoticeEdit";
+import Inquiry from "./page/Inquiry";
+import InquiryWrite from "./page/inquiryWrite";
+import InquiryBoard from "./page/InquiryBoard";
+import InquiryEdit from "./page/InquiryEdit";
+import {signUpIdCheck} from "./hook/signUpIdCheck";
 
 
 function App() {
     const [login, setLogin] = useState([0, false]); // isAdmin, isLoggedIn
 
     useEffect(() => {
-        const result = checkLoginStatus();
+        const result = signUpIdCheck();
         setLogin(result)
     }, []);
 

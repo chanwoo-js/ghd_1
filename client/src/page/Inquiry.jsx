@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import style from "../css/notice.module.css";
+import style from "../css/inquiry.module.css";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons"
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
 
-const Notice = ({login,setLogin}) => {
+const Inquiry = ({login}) => {
     const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 카운터
     const [listCount, setListCount] = useState(10); // 보여줄 글 갯수
     const [data, setData] = useState(); // 글 목록 가져와서 저장
@@ -14,15 +14,21 @@ const Notice = ({login,setLogin}) => {
     const navigate = useNavigate();
     // 마운트시 db 글 가져오기
     useEffect(()=>{
-        const handleNotice = async () => {
+        const handleInquiry = async () => {
             try {
-                // http://localhost:8000/notice로 들어오면 공지사항 목록을 보여줍니다.
-                const res = await axios.get('https://ghd-1.herokuapp.com/notice');
+                const res = await axios.get('https://ghd-1.herokuapp.com/api/inquiry');
                 const sortedData = res.data
                     .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
                     .map((item) => {
                         const date = new Date(item.created_at); // UTC를 로컬 시간대로 변환
-                        item.created_at = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+                        const currentDate = new Date(); // 현재 시간을 가져온다.
+                        if (date.toDateString() === currentDate.toDateString()) { // 오늘 날짜라면 시간만 표시한다.
+                            const hours = String(date.getHours()).padStart(2, '0'); // 시간
+                            const minutes = String(date.getMinutes()).padStart(2, '0'); // 분
+                            item.created_at = `${hours}:${minutes}`; // 시:분
+                        } else { // 오늘 날짜가 아니면 날짜만 표시
+                            item.created_at = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+                        }
                         return item;
                     });
                 setData(sortedData);
@@ -30,8 +36,10 @@ const Notice = ({login,setLogin}) => {
                 console.error(error);
             }
         };
-        handleNotice();
-    },[])
+        handleInquiry();
+    },[]);
+
+
     // 글 갯수 선택
     const handleListCount = (number) => {
         setListCount(number);
@@ -65,21 +73,21 @@ const Notice = ({login,setLogin}) => {
     const handleClick = async (id) => {
         try {
             // 조회수를 1개 증가, 선택된 게시글 보여주기
-            await axios.post(`https://ghd-1.herokuapp.com/notice/count/${id}`);
-            navigate(`/notice/board/${id}`);
+            await axios.post(`https://ghd-1.herokuapp.com/api/inquiry/count/${id}`);
+            navigate(`/inquiry/board/${id}`);
         } catch (error) {
             console.error(error);
         }
     };
 
     return (
-        <section className={style.notice}>
-            <div className={style.notice_contain}>
-                <h2>공지사항</h2>
+        <section className={style.inquiry}>
+            <div className={style.inquiry_contain}>
+                <h2>문의 게시판</h2>
                 <div>
-                    {login[0] === 1 && login[1] && (
+                    {login[1] && (
                         <div className={style.edit_contain}>
-                            <Link to="/notice/write"><button>글쓰기</button></Link>
+                            <Link to="/inquiry/write"><button>글쓰기</button></Link>
                         </div>
                     )}
                     <div className={style.list_count}>
@@ -96,25 +104,27 @@ const Notice = ({login,setLogin}) => {
                 </div>
                 <table>
                     <thead>
-                        <tr>
-                            <th>번호</th>
-                            <th>제목</th>
-                            <th>작성자</th>
-                            <th>작성일자</th>
-                            <th>조회</th>
-                        </tr>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>작성일자</th>
+                        <th>조회</th>
+                    </tr>
                     </thead>
                     <tbody>
                     {filteredData && filteredData.slice(indexOfFirstNotice, indexOfLastNotice)
-                        .map((notice) => (
-                            <tr key={notice.id}>
-                                <td>{notice.id}</td>
-                                <td onClick={() => handleClick(notice.id)}>{notice.title}</td>
-                                <td>{notice.author}</td>
-                                <td>{notice.created_at.substring(0, 10)}</td>
-                                <td>{notice.count}</td>
-                            </tr>
-                        ))}
+                        .map((inquiry) => {
+                            return (
+                                <tr key={inquiry.id}>
+                                    <td>{inquiry.id}</td>
+                                    <td onClick={()=> handleClick(inquiry.id)}>{inquiry.title}</td>
+                                    <td>{inquiry.author}</td>
+                                    <td>{inquiry.created_at.substring(0, 10)}</td>
+                                    <td>{inquiry.count}</td>
+                                </tr>
+                            );
+                        })}
                     </tbody>
                 </table>
                 <div className={style.pagination_contain}>
@@ -154,5 +164,5 @@ const Notice = ({login,setLogin}) => {
     );
 };
 
-export default Notice;
+export default Inquiry;
 

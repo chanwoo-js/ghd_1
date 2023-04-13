@@ -1,5 +1,5 @@
 import React from 'react';
-import style from "./footer.module.css";
+import style from "../css/footer.module.css";
 import {Link} from "react-router-dom";
 
 const Footer = () => {
@@ -8,7 +8,7 @@ const Footer = () => {
             <div className={style.footer_contain}>
                 <div className={style.footer_left}>
                     <Link to="/">
-                        <img src={require("../../image/logo/logo_black.png")} alt="logo_image"/>
+                        <img src={require("../image/logo/logo_black.png")} alt="logo_image"/>
                     </Link>
                 </div>
                 <div className={style.footer_right}>

@@ -1,0 +1,13 @@
+/* ##########  WITH GOOD HOOD*/
+.with_ghd {background-color: #f6f6f6;}
+.with_ghd_contain > h2 {padding: 60px 0 20px 0; line-height: 1.8em; font-size: 40px; font-weight: 900; text-align: center;}
+.with_ghd_contain > p {padding-bottom: 30px; line-height: 30px; font-size: 18px; text-align: center; color: darkgrey}
+.with_ghd_contain > div {padding: 30px 0 80px 0}
+.swiper_slide > div > div {
+    -webkit-transition-timing-function:linear!important;
+    -o-transition-timing-function:linear!important;
+    transition-timing-function:linear!important;}
+.swiper_slide > div > div > div {width: 230px; height: 350px;}
+.swiper_slide img {width: 230px; height: 350px; box-shadow: rgba(0, 0, 0, 0.176) 0 16px 10px 0; border-radius: 5px;}
+
+

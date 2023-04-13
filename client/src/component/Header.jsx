@@ -1,9 +1,7 @@
 import React from 'react';
+import style from "../css/header.module.css";
 import {Link, useNavigate} from "react-router-dom";
-import style from "./header.module.css";
-import logoImg from "../../image/logo/logo.png";
-import {logout} from "../../hook/useLoginout";
-
+import {logout} from "../hook/logout";
 
 const Header = ({login, setLogin}) => {
     const navigate = useNavigate()
@@ -16,7 +14,7 @@ const Header = ({login, setLogin}) => {
             <div className={style.header_contain}>
                 <h1 className={style.logo}>
                     <Link to="/">
-                        <img src={logoImg} alt="logo_image"/>
+                        <img src={require("../image/logo/logo.png")} alt="logo_image"/>
                     </Link>
                 </h1>
                 <nav className={style.gnb}>
@@ -30,6 +28,9 @@ const Header = ({login, setLogin}) => {
                 <ul className={style.header_right}>
                     {login[1] ? (
                         <>
+                            <li>
+                                <Link to="/signUp">내 정보</Link>
+                            </li>
                             <li>
                                 <button onClick={handleLogout}>로그아웃</button>
                             </li>

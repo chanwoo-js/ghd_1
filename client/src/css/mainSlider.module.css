@@ -1,0 +1,20 @@
+/* ##################################.section_main_slider */
+.main_slider_container img {display: block; width: inherit; height: 80vh; object-fit: cover; object-position: center; }
+
+.text_box {display: flex;flex-direction: column; justify-content: flex-end;  align-items: flex-start; position: absolute; left: 0;bottom: 0;width: 40%;height: 100%;color: white;font-size: 2rem;line-height: 1.5em;font-weight: bold;text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.8), 3px 3px 10px rgba(0, 0, 0, 0.5), 2px 2px 10px rgba(0, 0, 0, 0.5), 1px 1px 10px rgba(0, 0, 0, 0.5);background-color: rgba(238,238,238, 0.8) }
+.text_box div {position:absolute; left: 30%; top:50%; opacity: 0; animation: slide-up 1s ease-in-out forwards;}
+.text_box h2 { font-size: 70px; line-height: 2em}
+.text_box p {font-size: 30px; line-height: 2em}
+.text_box span {font-size: 16px; line-height: 1.2em; margin-right: 10px;}
+
+/*text_box 애니메이션*/
+@keyframes slide-up {
+    from {opacity: 0; transform: translate(0, 200%);}
+    to {opacity: 1; transform: translate(0, 0);}
+}
+/* prev, next button custom*/
+.left_arrow ~ div,
+.right_arrow ~ div{ display: none;}
+.swiper-button-prev,
+.swiper-button-next {font-size : 20px;color : #eeee;width : 100px;height : 100px;text-align : center;line-height : 20px;position: absolute;top :45%;z-index: 9999;}
+.right_arrow {right: 0;}
