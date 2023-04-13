@@ -19,6 +19,7 @@ import InquiryWrite from "./page/inquiryWrite";
 import InquiryBoard from "./page/InquiryBoard";
 import InquiryEdit from "./page/InquiryEdit";
 import {signUpIdCheck} from "./hook/signUpIdCheck";
+import PageNotFound from "./page/PageNotFound";
 
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
                     <Route path={"/signUp"} element={<SignUp/>}></Route>
                     <Route path={"/signUp/signUpComplete"} element={<SignUpComplete/>}></Route>
                     <Route path={"/user"} element={<User/>}></Route>
+                    <Route path={"*"} element={<PageNotFound/>}></Route>
                 </Routes>
                 <Footer/>
             </BrowserRouter>
