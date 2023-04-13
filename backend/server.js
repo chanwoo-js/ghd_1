@@ -7,7 +7,6 @@ const PORT = process.env.PORT || 8000;
 
 app.use((req, res, next) => {
     res.setHeader('Cache-Control', 'public, max-age=86400');
-    res.status(404).sendFile(__dirname + "/build/index.html");
     next();
 });
 app.use(express.json());
