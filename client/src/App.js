@@ -33,7 +33,7 @@ function App() {
 
     return (
         <div className="App">
-            <BrowserRouter>
+            <BrowserRouter basename={"/"}>
                 <Header login={login} setLogin={setLogin} />
                 <PageTop/>
                 <Routes>
