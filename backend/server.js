@@ -18,16 +18,16 @@ app.use(express.static("build"))
 app.get("/", function (req, res){
     res.sendFile(__dirname +"/build/index.html")
 })
-app.get("/notice", function (req, res){
+app.get("/notice/*", function (req, res){
     res.sendFile(__dirname +"/build/index.html")
 })
-app.get("/roomInfo", function (req, res){
+app.get("/roomInfo/*", function (req, res){
     res.sendFile(__dirname +"/build/index.html")
 })
-app.get("/reservationStatus", function (req, res){
+app.get("/reservationStatus/*", function (req, res){
     res.sendFile(__dirname +"/build/index.html")
 })
-app.get("/inquiry", function (req, res){
+app.get("/inquiry/*", function (req, res){
     res.sendFile(__dirname +"/build/index.html")
 })
 
