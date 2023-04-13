@@ -29,6 +29,7 @@ router.get("/board/:id", (req, res) => {
         }
     });
 });
+
 // 선택된 게시글 수정하기 눌렀을때 기존 정보 가지고 오기
 router.get("/board/:id/edit", (req, res) => {
     const { id } = req.params;
