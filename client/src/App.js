@@ -1,5 +1,5 @@
 import {useEffect, useState } from "react";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Route, Routes } from "react-router-dom";
 import {Header, Footer} from "./export/components"
 import "./css/reset.css";
 import Main from "./page/Main";
@@ -50,6 +50,7 @@ function App() {
                     <Route path={"/signUp"} element={<SignUp/>}></Route>
                     <Route path={"/signUp/signUpComplete"} element={<SignUpComplete/>}></Route>
                     <Route path={"/user"} element={<User/>}></Route>
+
                 </Routes>
                 <Footer/>
             </BrowserRouter>
