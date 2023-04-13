@@ -15,7 +15,8 @@ app.use((req, res, next) => {
     next();
 });
 app.use((req, res, next) => {
-    res.status(404).sendFile(__dirname +"/build/index.html")
+    res.status(404).sendFile(__dirname +"/build/404.html")
+    next();
 });
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
