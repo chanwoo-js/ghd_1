@@ -51,7 +51,6 @@ function App() {
                     <Route path={"/signUp"} element={<SignUp/>}></Route>
                     <Route path={"/signUp/signUpComplete"} element={<SignUpComplete/>}></Route>
                     <Route path={"/user"} element={<User/>}></Route>
-                    <Route path="/*" element={<Navigate replace to="/"/>} />
                 </Routes>
                 <Footer/>
             </BrowserRouter>

@@ -18,10 +18,18 @@ app.use(express.static("build"))
 app.get("/", function (req, res){
     res.sendFile(__dirname +"/build/index.html")
 })
+app.get("/notice", function (req, res){
+    res.sendFile(__dirname +"/build/index.html")
+})
 app.get("/roomInfo", function (req, res){
     res.sendFile(__dirname +"/build/index.html")
 })
-
+app.get("/reservationStatus", function (req, res){
+    res.sendFile(__dirname +"/build/index.html")
+})
+app.get("/inquiry", function (req, res){
+    res.sendFile(__dirname +"/build/index.html")
+})
 
 const mainRouter = require("./router/mainRouter");
 const signUpRouter = require("./router/signUpRouter");
