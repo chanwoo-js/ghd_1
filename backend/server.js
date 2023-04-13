@@ -15,10 +15,7 @@ app.use(cookieParser());
 
 // 이폴더는 맘대로 꺼내가도 된다.
 app.use(express.static("build"))
-// app.get("/", function (req, res){
-//     res.sendFile(__dirname +"/build/index.html")
-// })
-app.get("/*", function (req, res){
+app.get("/", function (req, res){
     res.sendFile(__dirname +"/build/index.html")
 })
 
