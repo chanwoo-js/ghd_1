@@ -3,10 +3,10 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const app = express();
 const PORT = process.env.PORT || 8000;
-// app.use((req, res, next) => {
-//     res.setHeader('Cache-Control', 'public, max-age=86400');
-//     next();
-// });
+app.use((req, res, next) => {
+    res.setHeader('Cache-Control', 'public, max-age=86400');
+    next();
+});
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
