@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 8000;
 
 app.use((req, res, next) => {
     res.setHeader('Cache-Control', 'public, max-age=86400');
+    res.status(404).sendFile(__dirname + "/build/index.html");
     next();
 });
 app.use(express.json());
@@ -19,9 +20,6 @@ app.use(serveStatic("build"));
 app.get("/", function (req, res){
     res.sendFile(__dirname +"/build/index.html")
 })
-app.use((req, res, next) => {
-    res.status(404).sendFile(__dirname + "/build/index.html");
-});
 
 const mainRouter = require("./router/mainRouter");
 const signUpRouter = require("./router/signUpRouter");
