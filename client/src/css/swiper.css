@@ -15,3 +15,10 @@
 .swiper-button-next:before {content : "\f0da"; right: 0;}
 .swiper-pagination-bullet {width: 30px!important;border-radius: 5px!important;}
 .swiper-pagination-bullet.swiper-pagination-bullet-active{ background-color: black}
+
+/*브라우저 창의 너비가 768 픽셀 이하일 때*/
+@media (max-width: 768px) {
+    .swiper-button-prev:before,.swiper-button-next:before{ font-size: 30px; width: 30px; height: 30px; line-height: 30px;}
+    .swiper-pagination-bullet {width: 0!important; border-radius: 5px!important;}
+    .swiper-pagination-bullet.swiper-pagination-bullet-active{ background-color: black}
+}

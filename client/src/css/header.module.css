@@ -19,3 +19,6 @@
 .header_right > li > a {font-weight: 500; width: 100px; text-align: center}
 
 
+@media (max-width: 768px) {
+    .header_contain {width: 100%;}
+}
