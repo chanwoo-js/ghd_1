@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../model/mysql");
+const moment = require('moment-timezone');
+moment.tz.setDefault("Asia/Seoul");
 
-// http://localhost:8000/notice로 들어오면 공지사항 목록을 보여줍니다.
 router.get("/",(req, res) => {
     // const q = "SELECT * FROM ghd.notice_board";
     const q = "SELECT id, title, author, created_at, count, admin FROM notice_board";
@@ -57,9 +58,11 @@ router.post("/board/:id/edit/write", (req, res) => {
 
 // 공지사항 쓰기
 router.post("/write",(req, res) => {
-    const { title, author, admin ,text_area} = req.body;
-    const q = `INSERT INTO notice_board (title, author, admin, text_area) VALUES (?, ?, ?, ?)`;
-    db.query(q,[title, author, admin, text_area],(error, data) => {
+    const { title, author, admin ,textArea} = req.body;
+    const date = moment().format('YYYY-MM-DD HH:mm:ss');
+    console.log(`[${author}] [title : ${title}] 문의 게시물을 남겼습니다. ${date}`)
+    const q = `INSERT INTO notice_board (title, author, admin, text_area, created_at) VALUES (?, ?, ?, ?, ?)`;
+    db.query(q,[title, author, admin, textArea, date],(error, data) => {
         if (error) {
             console.error(error);
         } else {

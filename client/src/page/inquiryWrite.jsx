@@ -1,45 +1,38 @@
 import React, {useState} from 'react';
 import style from "../css/inquiryWrite.module.css"
 import axios from "axios";
-import jwt_decode from "jwt-decode";
-import {getLocalStorage} from "../hook/getLocalStorage";
 import {useNavigate} from "react-router-dom";
 
-const InquiryWrite = ({login}) => {
+const InquiryWrite = ({login, user}) => {
     const [title, setTitle] = useState("");
     const [textArea, setTextArea] = useState("");
     const navigate = useNavigate();
 
+    // 문의 게시판 등록 기능
     const handleSubmit = async (e) => {
         e.preventDefault();
+        // 제목과 내용 둘중 하나라도 없으면 경고
         if (!title || !textArea) {
             alert("제목과 내용을 모두 입력해주세요.");
         } else {
-            const token = getLocalStorage("token");
-            // 토큰이 존재하고 유효한 형식인지 확인합니다.
-            if (!token || token.split(".").length !== 3) {
-                alert("유효하지 않은 토큰입니다.");
-                return;
-            }
-            const decoded = jwt_decode(token);
-            console.log(decoded)
-            const data = {
-                title: title,
-                author: decoded.name,
-                userId: decoded.userId,
-                admin: decoded.isAdmin,
-                text_area: textArea,
-            };
-            console.log(decoded.userId);
-            try {
-                if (decoded.isAdmin === 0 && login[0] === 0 && login[1]) {
-                    await axios.post(`${process.env.REACT_APP_API_URL}/api/inquiry/write`, data);
-                    navigate("/inquiry");
-                } else {
-                    alert("로그인을 해주세요");
+            if (!login) {
+                return alert("로그인 해주세요");
+            }else {
+                try{
+                    const inquiry_write_data = {
+                        title: title,
+                        author: user.name,
+                        admin: user.admin,
+                        userId: user.userId,
+                        textArea: textArea,
+                    };
+                    await axios.post(`${process.env.REACT_APP_API_URL}/api/inquiry/write`, inquiry_write_data)
+                        .then(()=>{
+                            navigate("/inquiry");
+                        })
+                }catch (error) {
+                    console.log(error)
                 }
-            } catch (err) {
-                console.log(err);
             }
         }
     };

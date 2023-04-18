@@ -10,19 +10,19 @@ const NoticeWrite = ({login}) => {
     const { id } = useParams(); // URL에서 ID 값을 가져옵니다.
 
     useEffect(()=>{
-        const getBoard = async () => {
-            if(login[0] === 1 && login[1]){
+        if(login){
+            const getBoard = async () => {
                 try {
                     const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/notice/board/${id}/edit`)
-                    const {title,text_area}=res.data[0]
+                    const {title,text_area} = res.data[0]
                     setTitle(title)
                     setTextArea(text_area)
                 }catch (error){
                     console.log(error)
                 }
             }
+            getBoard();
         }
-        getBoard();
     },[id, login])
 
 
@@ -31,22 +31,21 @@ const NoticeWrite = ({login}) => {
         if (!title || !textArea) {
             alert("제목과 내용을 모두 입력해주세요.");
         }else {
-            const data = {
-                title: title,
-                text_area: textArea
-            }
-            try {
-                if ( login[0] === 1 && login[1] ) {
-               await axios.post(`${process.env.REACT_APP_API_URL}/api/notice/board/${id}/edit/write`, data)
+            if(!login){
+                return alert("로그인 해주세요");
+            }else {
+                try {
+                    const notice_edit_data = {
+                        title: title,
+                        text_area: textArea
+                    }
+                    await axios.post(`${process.env.REACT_APP_API_URL}/api/notice/board/${id}/edit/write`, notice_edit_data)
                     navigate("/notice")
-                } else {
-                    alert("관리자가 아니거나 또는 로그인을 해주세요")
+                } catch (err) {
+                    console.log(err)
                 }
-            } catch (err) {
-                console.log(err)
             }
         }
-
     };
     const handleBack = () => {
         navigate("/notice")

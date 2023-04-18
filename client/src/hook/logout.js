@@ -1,6 +1,9 @@
-export const logout = () => {
-    // 로컬 스토리지 토큰 삭제
-    localStorage.removeItem("token");
-    // 로그아웃, 상태로 바꿉니다.
-    return [0, false]
+import axios from "axios";
+
+export const logout = async (setLogin, setUser) => {
+    const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/logout`, {}, { withCredentials: true });
+    if (res.status === 200) {
+        setUser(null)
+        setLogin(false)
+    }
 }

@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState,useMemo} from 'react';
 import style from "../css/inquiry.module.css";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons"
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
+import moment from "../export/moment";
 
 const Inquiry = ({login}) => {
     const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 카운터
@@ -12,28 +11,29 @@ const Inquiry = ({login}) => {
     const [search, setSearch] = useState(''); // 검색어 저장
     const [searchBy, setSearchBy] = useState('title'); // ~로 검색할것이다.
     const navigate = useNavigate();
+    //     {
+    //     headers: {
+    //         'Cache-Control': 'no-cache, no-store, must-revalidate',
+    //         'Pragma': 'no-cache',
+    //         'Expires': '0',
+    //     },
+    // }
     // 마운트시 db 글 가져오기
-    useEffect(()=>{
+    useEffect(() => {
         const handleInquiry = async () => {
             try {
-                const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/inquiry`, {
-                    headers: {
-                        'Cache-Control': 'no-cache, no-store, must-revalidate',
-                        'Pragma': 'no-cache',
-                        'Expires': '0',
-                    },
-                });
+                const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/inquiry`);
                 const sortedData = res.data
-                    .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+                    .sort((a, b) => moment(b.created_at).diff(moment(a.created_at)))
                     .map((item) => {
-                        const date = new Date(item.created_at); // UTC를 로컬 시간대로 변환
-                        const currentDate = new Date(); // 현재 시간을 가져온다.
-                        if (date.toDateString() === currentDate.toDateString()) { // 오늘 날짜라면 시간만 표시한다.
-                            const hours = String(date.getHours()).padStart(2, '0'); // 시간
-                            const minutes = String(date.getMinutes()).padStart(2, '0'); // 분
-                            item.created_at = `${hours}:${minutes}`; // 시:분
-                        } else { // 오늘 날짜가 아니면 날짜만 표시
-                            item.created_at = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+                        if (item.created_at) {
+                            const date = moment(item.created_at).local();
+                            const currentDate = moment();
+                            if (date.isSame(currentDate, 'day')) {
+                                item.created_at = date.format('HH:mm');
+                            } else {
+                                item.created_at = date.format('YYYY-MM-DD');
+                            }
                         }
                         return item;
                     });
@@ -43,7 +43,7 @@ const Inquiry = ({login}) => {
             }
         };
         handleInquiry();
-    },[]);
+    }, []);
 
 
     // 글 갯수 선택
@@ -72,9 +72,12 @@ const Inquiry = ({login}) => {
     //예를 들어, 현재 페이지가 3페이지, 한 페이지에서 보여줄 글의 수가 10개인 경우 시작 인덱스는 (3 - 1) * 10 = 20, 끝 인덱스는 20 + 10 - 1 = 29가 된다.
 
     // 무엇으로 검색해야될지 결과에 따라 나타내줍니다.
-    const filteredData = data && data.filter((item) =>
-        searchBy === 'title' ? item.title.includes(search) : item.author.includes(search)
-    );
+    const filteredData = useMemo(() => {
+        if (!data) return;
+        return data.filter((item) =>
+            searchBy === 'title' ? item.title.includes(search) : item.author.includes(search)
+        );
+    }, [data, searchBy, search]);
 
     const handleClick = async (id) => {
         try {
@@ -91,7 +94,7 @@ const Inquiry = ({login}) => {
             <div className={style.inquiry_contain}>
                 <h2>문의 게시판</h2>
                 <div>
-                    {login[1] && (
+                    {login && (
                         <div className={style.edit_contain}>
                             <Link to="/inquiry/write"><button>글쓰기</button></Link>
                         </div>
@@ -120,10 +123,11 @@ const Inquiry = ({login}) => {
                     </thead>
                     <tbody>
                     {filteredData && filteredData.slice(indexOfFirstNotice, indexOfLastNotice)
-                        .map((inquiry) => {
+                        .map((inquiry,index) => {
+                            const sequentialId = Math.floor((inquiry.id - 4) / 10);
                             return (
                                 <tr key={inquiry.id}>
-                                    <td>{inquiry.id}</td>
+                                    <td>{sequentialId}</td>
                                     <td onClick={()=> handleClick(inquiry.id)}>{inquiry.title}</td>
                                     <td>{inquiry.author}</td>
                                     <td>{inquiry.created_at.substring(0, 10)}</td>
@@ -159,9 +163,6 @@ const Inquiry = ({login}) => {
                         <option value="author">작성자</option>
                     </select>
                     <input type="text" value={search} onChange={handleSearch} />
-                    <button className={style.search_button} >
-                        <FontAwesomeIcon className={style.search_button_fa} icon={faMagnifyingGlass} />
-                    </button>
                 </div>
 
             </div>

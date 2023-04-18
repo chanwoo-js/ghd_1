@@ -1,61 +1,56 @@
 import React, {useEffect, useState} from 'react';
 import style from "../css/inquiryWrite.module.css"
 import axios from "axios";
-import jwt_decode from "jwt-decode";
-import {getLocalStorage} from "../hook/getLocalStorage";
 import {useNavigate, useParams} from "react-router-dom";
 
-const InquiryEdit = ({login}) => {
-    const [title, setTitle] = useState("");
-    const [textArea, setTextArea] = useState("");
-    const [userId, setUserId] = useState("")
+const InquiryEdit = ({login, user}) => {
+    const [title, setTitle] = useState(""); // 제목
+    const [textArea, setTextArea] = useState(""); // 내용
     const navigate = useNavigate();
-    const { id } = useParams(); // URL에서 ID 값을 가져옵니다.
+    const { id } = useParams();
 
-    // 마운트시 글 정보 불러오기
+    // 문의 게시판 선택 글 정보 불러오기
     useEffect(()=>{
-        const getBoard = async () => {
-            if(login[0] === 0 && login[1]){
+        if (login){
+            const getBoard = async () => {
                 try {
                     const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/inquiry/board/${id}/edit`)
-                    const {title,text_area,user_id}=res.data[0]
+                    const {title,text_area} = res.data[0];
                     setTitle(title)
                     setTextArea(text_area)
-                    setUserId(user_id)
                 }catch (error){
-                    console.log(error)
+                    console.log(error);
                 }
             }
+            getBoard();
         }
-        getBoard();
     },[id, login])
 
-    //
+
+    // 수정하기
     const handleSubmit = async(e) => {
         e.preventDefault();
         if (!title || !textArea) {
             alert("제목과 내용을 모두 입력해주세요.");
         }else {
-            const token = getLocalStorage("token")
-            const decoded = jwt_decode(token);
-            const data = {
-                title: title,
-                admin: decoded.isAdmin,
-                text_area: textArea
-            }
-            try {
-                if (decoded.isAdmin === 0 && login[0] === 0 && login[1] && decoded.userId === userId ) {
-                    await axios.post(`${process.env.REACT_APP_API_URL}/api/inquiry/board/${id}/edit/write`, data)
+            if(!login){
+                return alert("로그인 해주세요");
+            }else {
+                try {
+                    const inquiry_edit_data = {
+                        title: title,
+                        textArea : textArea,
+                        author : user.name
+                    }
+                    await axios.post(`${process.env.REACT_APP_API_URL}/api/inquiry/board/${id}/edit/write`, inquiry_edit_data)
                     navigate("/inquiry")
-                } else {
-                    alert("관리자가 아니거나 또는 로그인을 해주세요")
+                } catch (err) {
+                    console.log(err)
                 }
-            } catch (err) {
-                console.log(err)
             }
         }
-
     };
+    // 돌아가기
     const handleBack = () => {
         navigate("/inquiry")
     }

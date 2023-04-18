@@ -27,6 +27,7 @@ import articleInfoSliderImg4 from "../image/archives/archive_8.jpg"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, {Autoplay, EffectFade, Navigation, Pagination} from 'swiper';
 import 'swiper/swiper-bundle.min.css';
+import axios from "axios";
 SwiperCore.use([Autoplay, Pagination]);
 
 
@@ -123,9 +124,13 @@ const Main = (props) => {
             });
         };
     }, []);
-
+    const handletestClick = async () => {
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/sessionCheck`, {withCredentials: true})
+        console.log(res);
+    }
     return (
         <main>
+
            <MainSlider/>
             <section className={style.room_info}>
                 <div className={`${style.studio_info_contain} studio_info_contain`}>
@@ -249,6 +254,7 @@ const Main = (props) => {
                         </div>
                         <div>
                             <h3>ARCHIVE</h3>
+                            <button onClick={handletestClick}>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</button>
                             <ul className={style.archive_list}>
                                 <li>
                                     <h4 onClick={(e) => StudioMenuChangeButton(e)}>FURNITURE</h4>

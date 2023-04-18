@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -15,15 +16,18 @@
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "express-session": "^1.17.3",
     "helmet": "^6.0.1",
     "helmet-csp": "^3.4.0",
     "jsonwebtoken": "^9.0.0",
     "moment": "^2.29.4",
+    "moment-timezone": "^0.5.43",
     "mysql": "^2.18.1",
     "mysql2": "^3.2.0",
     "node-fetch": "^3.3.1",
-    "nodemon": "^2.0.21",
+    "nodemon": "^2.0.22",
     "sequelize": "^6.29.3",
-    "serve-static": "^1.15.0"
+    "serve-static": "^1.15.0",
+    "session-file-store": "^1.5.0"
   }
 }

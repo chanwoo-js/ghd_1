@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import style from "../css/notice.module.css";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons"
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
+import moment from "../export/moment";
 
-const Notice = ({login,setLogin}) => {
+const Notice = ({login, user}) => {
     const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 카운터
     const [listCount, setListCount] = useState(10); // 보여줄 글 갯수
     const [data, setData] = useState(); // 글 목록 가져와서 저장
@@ -13,16 +12,22 @@ const Notice = ({login,setLogin}) => {
     const [searchBy, setSearchBy] = useState('title'); // ~로 검색할것이다.
     const navigate = useNavigate();
     // 마운트시 db 글 가져오기
-    useEffect(()=>{
+    useEffect(() => {
         const handleNotice = async () => {
             try {
-                // http://localhost:8000/notice로 들어오면 공지사항 목록을 보여줍니다.
                 const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/notice`);
                 const sortedData = res.data
-                    .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+                    .sort((a, b) => moment(b.created_at).diff(moment(a.created_at)))
                     .map((item) => {
-                        const date = new Date(item.created_at); // UTC를 로컬 시간대로 변환
-                        item.created_at = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+                        if (item.created_at) {
+                            const date = moment(item.created_at).local();
+                            const currentDate = moment();
+                            if (date.isSame(currentDate, 'day')) {
+                                item.created_at = date.format('HH:mm');
+                            } else {
+                                item.created_at = date.format('YYYY-MM-DD');
+                            }
+                        }
                         return item;
                     });
                 setData(sortedData);
@@ -31,7 +36,7 @@ const Notice = ({login,setLogin}) => {
             }
         };
         handleNotice();
-    },[])
+    }, []);
     // 글 갯수 선택
     const handleListCount = (number) => {
         setListCount(number);
@@ -77,7 +82,7 @@ const Notice = ({login,setLogin}) => {
             <div className={style.notice_contain}>
                 <h2>공지사항</h2>
                 <div>
-                    {login[0] === 1 && login[1] && (
+                    {login && user.admin === 1 && (
                         <div className={style.edit_contain}>
                             <Link to="/notice/write"><button>글쓰기</button></Link>
                         </div>
@@ -143,9 +148,6 @@ const Notice = ({login,setLogin}) => {
                         <option value="author">작성자</option>
                     </select>
                     <input type="text" value={search} onChange={handleSearch} />
-                    <button className={style.search_button} >
-                        <FontAwesomeIcon className={style.search_button_fa} icon={faMagnifyingGlass} />
-                    </button>
                 </div>
 
             </div>

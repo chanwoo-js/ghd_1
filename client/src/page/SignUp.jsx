@@ -13,7 +13,7 @@ const SignUp = (props) => {
     const [email, setEmail] = useState(["",false]); // 이메일
     const navigate = useNavigate();
 
-    // 아이디
+    // 아이디 입력
     const userIdOnChange = (e) => {
         // 영문과 숫자만 포함하는 정규식
         const regex = /^[a-zA-Z0-9]{4,13}$/;
@@ -21,7 +21,7 @@ const SignUp = (props) => {
         setUserId([e.target.value, idValid]);
         setUserCheckDuplicateId(null);
     };
-    // 중복확인
+    // 아이디 중복확인
     const handleCheckDuplicateId = async (e) => {
         e.preventDefault();
         const info = {
@@ -39,12 +39,13 @@ const SignUp = (props) => {
             console.log(err);
         }
     };
-    // 패스워드
+    // 패스워드 입력
     const passwordOnChange = (e) => {
         const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/;
         const passwordValid = passwordRegex.test(e.target.value);
         setPassword([e.target.value, passwordValid]);
     }
+    // 패스워드 한번더 확인
     const passwordConfirmOnChange = (e) => {
         const value = e.target.value;
         if(value === password[0]){
@@ -54,25 +55,27 @@ const SignUp = (props) => {
             setPasswordConfirm([value,false])
         }
     }
-    // 이름
+    // 이름 입력
     const nameOnChange = (e) => {
         const nameRegex = /^[a-zA-Z가-힣]+$/;
         const nameValid = nameRegex.test(e.target.value);
         const nameValidSpace = e.target.value.replace(/\s/g, "");
         setName([nameValidSpace, nameValid]);
     }
-    // 핸드폰 번호
+    // 핸드폰 번호 입력
     const phoneNumberOnChange = (e) => {
         const phoneRegex = /^01(?:0|1|[6-9])\d{7,8}$/;
         const phoneNumber = e.target.value.replace(/-/g, ""); // 하이픈 제거
         const phoneValid = phoneRegex.test(phoneNumber);
         setPhoneNumber([phoneNumber,phoneValid]);
     }
+    // 이메일 입력
     const emailOnChange = (e) => {
         const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         const emailValid = emailRegex.test(e.target.value);
         setEmail([e.target.value,emailValid]);
     }
+    // 회원 가입 클릭
     const handleSubmit = async (e) => {
         e.preventDefault();
         // 아이디 수정 확인

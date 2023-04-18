@@ -1,10 +1,10 @@
 import {logout} from "../hook/logout";
 import {signUpIdCheck} from "../hook/signUpIdCheck";
-import {getLocalStorage} from "../hook/getLocalStorage";
+import {checkSession} from "../hook/checkSession";
 
 
 export {
     logout,
     signUpIdCheck,
-    getLocalStorage
+    checkSession
 }

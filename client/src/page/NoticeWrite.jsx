@@ -1,11 +1,9 @@
 import React, {useState} from 'react';
 import style from "../css/noticeWrite.module.css"
 import axios from "axios";
-import jwt_decode from "jwt-decode";
-import {getLocalStorage} from "../hook/getLocalStorage";
 import {useNavigate} from "react-router-dom";
 
-const NoticeWrite = ({login}) => {
+const NoticeWrite = ({login,user}) => {
     const [title, setTitle] = useState("");
     const [textArea, setTextArea] = useState("");
     const navigate = useNavigate();
@@ -15,30 +13,30 @@ const NoticeWrite = ({login}) => {
         if (!title || !textArea) {
             alert("제목과 내용을 모두 입력해주세요.");
         }else {
-            const token = getLocalStorage("token")
-            const decoded = jwt_decode(token);
-            const data = {
+            console.log(user)
+            const notice_write_data = {
                 title: title,
-                author: decoded.name,
-                admin: decoded.isAdmin,
-                text_area: textArea
+                author: user.name,
+                admin: user.admin,
+                textArea: textArea
             }
             try {
-                if (decoded.isAdmin === 1 && login[0] === 1 && login[1] && decoded.name === "관리자") {
-                    await axios.post(`${process.env.REACT_APP_API_URL}/api/notice/write`, data)
-                    navigate("/notice")
+                if (user.admin === 1 && login && user.name === "관리자") {
+                    await axios.post(`${process.env.REACT_APP_API_URL}/api/notice/write`, notice_write_data)
+                        .then(()=>{
+                            navigate("/notice");
+                        })
                 } else {
                     alert("관리자가 아니거나 또는 로그인을 해주세요")
                 }
-            } catch (err) {
-                console.log(err)
+            }catch (error) {
+                console.log(error)
             }
         }
     };
     const handleBack = () => {
         navigate("/notice")
     }
-
     return (
         <section>
             <div className={style.write_contain}>

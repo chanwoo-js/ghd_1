@@ -3,10 +3,10 @@ import style from "../css/header.module.css";
 import {Link, useNavigate} from "react-router-dom";
 import {logout} from "../hook/logout";
 
-const Header = ({login, setLogin}) => {
+const Header = ({login, setLogin, user, setUser}) => {
     const navigate = useNavigate()
     const handleLogout = () => {
-        setLogin(logout);
+        logout(setLogin, setUser)
         navigate("/")
     };
     return (
@@ -26,10 +26,10 @@ const Header = ({login, setLogin}) => {
                     </ul>
                 </nav>
                 <ul className={style.header_right}>
-                    {login[1] ? (
+                    {login ? (
                         <>
                             <li>
-                                <Link to="/signUp">내 정보</Link>
+                                <Link to="/login">{`${user.name} 님`}</Link>
                             </li>
                             <li>
                                 <button onClick={handleLogout}>로그아웃</button>

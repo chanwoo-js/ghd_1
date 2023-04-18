@@ -1,5 +1,5 @@
 import {useEffect, useState } from "react";
-import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Header, Footer} from "./export/components"
 import "./css/reset.css";
 import Main from "./page/Main";
@@ -18,36 +18,35 @@ import Inquiry from "./page/Inquiry";
 import InquiryWrite from "./page/inquiryWrite";
 import InquiryBoard from "./page/InquiryBoard";
 import InquiryEdit from "./page/InquiryEdit";
-import {signUpIdCheck} from "./hook/signUpIdCheck";
+import {checkSession} from "./hook/checkSession";
 
 
 function App() {
-
-    const [login, setLogin] = useState([0, false]); // isAdmin, isLoggedIn
+    const [user , setUser] = useState(null)
+    const [login, setLogin] = useState(false); // isLoggedIn
 
     useEffect(() => {
-        const result = signUpIdCheck();
-        setLogin(result)
+        checkSession(setUser, setLogin);
     }, []);
 
     return (
         <div className="App">
             <BrowserRouter>
-                <Header login={login} setLogin={setLogin} />
+                <Header login={login} setLogin={setLogin} user={user} setUser={setUser}/>
                 <PageTop/>
                 <Routes>
                     <Route path={"/"} element={<Main/>}></Route>
-                    <Route path={"/notice"} element={<Notice login={login}/>}></Route>
-                    <Route path={"/notice/write"} element={<NoticeWrite login={login}/>}></Route>
-                    <Route path={"/notice/board/:id"} element={<NoticeBoard login={login}/>}></Route>
+                    <Route path={"/notice"} element={<Notice login={login} user={user}/>}></Route>
+                    <Route path={"/notice/write"} element={<NoticeWrite login={login} user={user}/>}></Route>
+                    <Route path={"/notice/board/:id"} element={<NoticeBoard login={login} user={user}/>}></Route>
                     <Route path={"/notice/board/:id/edit"} element={<NoticeEdit login={login}/>}></Route>
                     <Route path={"/roomInfo"} element={<RoomInfo/>}></Route>
                     <Route path={"/reservationStatus"} element={<ReservationStatus/>}></Route>
-                    <Route path={"/inquiry"} element={<Inquiry login={login}/>}></Route>
-                    <Route path={"/inquiry/write"} element={<InquiryWrite login={login}/>}></Route>
-                    <Route path={"/inquiry/board/:id"} element={<InquiryBoard login={login}/>}></Route>
-                    <Route path={"/inquiry/board/:id/edit"} element={<InquiryEdit login={login}/>}></Route>
-                    <Route path={"/login"} element={<Login setLogin={setLogin}/>}></Route>
+                    <Route path={"/inquiry"} element={<Inquiry login={login} />}></Route>
+                    <Route path={"/inquiry/write"} element={<InquiryWrite login={login} user={user}/>}></Route>
+                    <Route path={"/inquiry/board/:id"} element={<InquiryBoard login={login} user={user}/>}></Route>
+                    <Route path={"/inquiry/board/:id/edit"} element={<InquiryEdit login={login} user={user}/>}></Route>
+                    <Route path={"/login"} element={<Login setLogin={setLogin} user={user} setUser={setUser} />}></Route>
                     <Route path={"/signUp"} element={<SignUp/>}></Route>
                     <Route path={"/signUp/signUpComplete"} element={<SignUpComplete/>}></Route>
                     <Route path={"/user"} element={<User/>}></Route>

@@ -2,31 +2,27 @@ const express = require("express");
 const router = express.Router();
 const db = require("../model/mysql")
 const bcrypt = require("bcrypt")
+const moment = require('moment-timezone');
+moment.tz.setDefault("Asia/Seoul");
 
 // 회원가입 정보
 router.post("/",(req, res)=>{
-    const user = [
-        req.body.user_id,
-        req.body.password,
-        req.body.name,
-        req.body.phone_number,
-        req.body.email,
-    ]
+    const {user_id, password, name, phone_number, email} = req.body;
     // 해쉬 암호화
-    bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
-        // password를 받지 못했을 경우
+    bcrypt.hash(password, 10, (err, hashedPassword) => {
+        // password 받지 못했을 경우
         if (err) {
             console.error(err,"hashPassword err");
         }else {
-            // passowrd 암호화까지 성공 했을 경우
-            user.push(hashedPassword)
-            const q = "INSERT INTO user (`user_id`, `password`, `name`, `phone_number`, `email`, `hashedPassword`) VALUES (?)";
-            db.query(q,[user],(err, data)=>{
+            // password 암호화까지 성공 했을 경우
+            const date = moment().format('YYYY-MM-DD HH:mm:ss');
+            const q = "INSERT INTO user (`created_at`, `user_id`, `name`, `phone_number`, `email`, `hashedPassword`) VALUES (?, ?, ?, ?, ?, ?)";
+            db.query(q,[date ,user_id , name, phone_number, email, hashedPassword],(err, data)=>{
                 if(err){
                     console.log(err,"query err")
                     res.json(false);
                 }else{
-                    console.log("회원가입 성공")
+                    console.log(`[${name}]님이 회원가입하셨습니다. ${date}`)
                     res.json(true);
                 }
             })

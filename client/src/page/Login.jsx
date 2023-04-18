@@ -3,12 +3,10 @@ import {useNavigate} from "react-router-dom";
 import style from "../css/login.module.css";
 import {Link} from "react-router-dom";
 import axios from "axios";
-import jwt_decode from 'jwt-decode';
 
-
-const Login = ({setLogin}) => {
+const Login = ({setUser,setLogin,user}) => {
     const [userId, setUserId] = useState(["",false]);
-    const [password, setPassword] = useState(["",false]);
+    const [userPassword, setUserPassword] = useState(["",false]);
     const navigate = useNavigate();
 
     const handleUserIdChange = (e) => {
@@ -20,42 +18,38 @@ const Login = ({setLogin}) => {
     const handlePasswordChange = (e) => {
         const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/;
         const passwordValid = passwordRegex.test(e.target.value);
-        setPassword([e.target.value, passwordValid]);
+        setUserPassword([e.target.value, passwordValid]);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (userId[1] && password[1]) { // 유효성 검사
+        if (userId[1] && userPassword[1]) { // 유효성 검사
             const info = {
                 userId: userId[0],
-                password: password[0]
+                userPassword: userPassword[0]
             };
             try {
-                const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/login`, info)
-                const token = res.data.token;
-                // console.log(token)
-                // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJja3NkbmdoIiwiaXNBZG1pbiI6MSwiaWF0IjoxNjgwNTkwMTM2LCJleHAiOjE2ODA1OTczMzZ9.jbDWer2LCodbgJ6WNtCuxegcyvWdEt2ASFMuijLK8XE
-                const decoded = jwt_decode(token);
-                // console.log(decoded);
-                // {userId: 'cksdngh', isAdmin: 1, iat: 1680584862, exp: 1680592062}
-                if (token) {
-                    if (decoded.isAdmin === 1) {
-                        // 관리자라면 관리자 권한 부여 로직을 여기에 추가합니다.
-                        alert("관리자로 로그인 되었습니다.")
-                        //토큰을 로컬 스토리지에 저장하고
-                        localStorage.setItem("token", token);
-                        setLogin([decoded.isAdmin,true])
-                        navigate('/');
-
-                    }else {
-                        // 관리자가 아니라면 바로 로컬 스토리지에 저장
-                        alert("로그인 되었습니다.")
-                        localStorage.setItem("token", token);
-                        setLogin([decoded.isAdmin,true]);
-                        navigate('/');
-
-                    }
-                }else{
+                const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/login`, info, {withCredentials: true})
+                const {isAdmin, name, userId} = res.data.user;
+                if (res.data.user) {
+                    alert(`${name}님 로그인 되었습니다.`)
+                    setUser({
+                        admin: isAdmin,
+                        name: name,
+                        userId : userId
+                    })
+                    setLogin(true)
+                    navigate('/');
+                } else if (isAdmin || res.data.user) {
+                    alert("관리자로 로그인 되었습니다.")
+                    setUser({
+                        admin: isAdmin,
+                        name: name,
+                        userId : userId
+                    })
+                    setLogin(true)
+                    navigate('/');
+                } else {
                     alert("아이디 또는 비밀번호가 일치하지 않습니다.")
                 }
             }
@@ -65,6 +59,7 @@ const Login = ({setLogin}) => {
             }
         }
     }
+
     return (
         <section>
             <div className={style.login_contain}>
@@ -86,11 +81,12 @@ const Login = ({setLogin}) => {
                                 name="password"
                                 placeholder="비밀번호를 입력해주세요"
                                 required
-                                value={password[0]}
+                                value={userPassword[0]}
                                 onChange={handlePasswordChange} />
                         </div>
                     </div>
                     <button type="submit">로그인</button>
+
                     <ul className={style.sub_menu_contain}>
                         <li>
                             <input type="checkbox" id="id_memory"/>
@@ -110,12 +106,11 @@ const Login = ({setLogin}) => {
                                     </>
                             }
                             {
-                                password[0] === "" && password[1] === false ? null :
+                                userPassword[0] === "" && userPassword[1] === false ? null :
                                     <>
-                                        {password[1] === false && (<p>비밀번호는 최소 6자리 이상, 최대 15자리 이하의 대문자, 소문자, 숫자를 각각 최소 1개 이상 포함해야 합니다.</p>)}
+                                        {userPassword[1] === false && (<p>비밀번호는 최소 6자리 이상, 최대 15자리 이하의 대문자, 소문자, 숫자를 각각 최소 1개 이상 포함해야 합니다.</p>)}
                                     </>
                             }
-
                         </li>
                     </ul>
 
@@ -126,6 +121,7 @@ const Login = ({setLogin}) => {
                     </div>
                 </form>
             </div>
+
         </section>
     );
 };
