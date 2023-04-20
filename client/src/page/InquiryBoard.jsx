@@ -50,7 +50,7 @@ const InquiryBoard = ({ login ,user}) => {
                             <span className={style.view}>조회수: {inquiryBoard.count}</span>
                         </div>
                         <p>{inquiryBoard.text_area}</p>
-                        {user.userId === inquiryBoard.user_id && user.name === inquiryBoard.author && login ? (
+                        {user && user.userId === inquiryBoard.user_id && user.name === inquiryBoard.author && login ? (
                             <div className={style.button_contain}>
                                 <button><Link to={`/inquiry/board/${id}/edit`}>수정하기</Link></button>
                                 <button onClick={deleteBoard}>삭제하기</button>
