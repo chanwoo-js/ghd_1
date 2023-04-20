@@ -124,10 +124,9 @@ const Inquiry = ({login}) => {
                     <tbody>
                     {filteredData && filteredData.slice(indexOfFirstNotice, indexOfLastNotice)
                         .map((inquiry,index) => {
-                            const sequentialId = Math.floor((inquiry.id - 4) / 10);
                             return (
                                 <tr key={inquiry.id}>
-                                    <td>{sequentialId}</td>
+                                    <td>{inquiry.id}</td>
                                     <td onClick={()=> handleClick(inquiry.id)}>{inquiry.title}</td>
                                     <td>{inquiry.author}</td>
                                     <td>{inquiry.created_at.substring(0, 10)}</td>
