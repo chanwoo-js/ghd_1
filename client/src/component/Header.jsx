@@ -1,24 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from "../css/header.module.css";
-import {Link, useNavigate} from "react-router-dom";
-import {logout} from "../hook/logout";
+import { Link, useNavigate } from "react-router-dom";
+import { logout } from "../hook/logout";
 
-const Header = ({login, setLogin, user, setUser}) => {
+const Header = ({ login, setLogin, user, setUser }) => {
     const navigate = useNavigate()
+    const [isHovered, setIsHovered] = useState(false);
+    const [isGnbVisible, setIsGnbVisible] = useState(true);
+
     const handleLogout = () => {
         logout(setLogin, setUser)
         navigate("/")
     };
+    const handleClick = () => {
+        setIsHovered(!isHovered);
+        setIsGnbVisible(!isGnbVisible);
+    };
+
     return (
         <header className={style.header}>
             <div className={style.header_contain}>
                 <h1 className={style.logo}>
                     <Link to="/">
-                        <img src={require("../image/logo/logo.png")} alt="logo_image"/>
+                        <img src={require("../image/logo/logo.png")} alt="logo_image" />
                     </Link>
                 </h1>
-                <nav className={style.gnb}>
-                    <ul>
+                <div className={`${style.transition_wrapper} ${isHovered ? style.hovered : ''}`} onClick={handleClick}>
+                    <div className={style.element1}></div>
+                    <div className={style.element2}></div>
+                    <div className={style.element3}></div>
+                </div>
+                <nav className={`${style.gnb} ${isGnbVisible ? `${style.active}` : ''}`}>
+                <ul>
                         <li><Link to="/notice">공지사항</Link></li>
                         <li><Link to="/roomInfo">룸 정보</Link></li>
                         <li><Link to="/reservationStatus">예약 현황</Link></li>
@@ -39,11 +52,11 @@ const Header = ({login, setLogin, user, setUser}) => {
                         <>
                             <li>
                                 <Link to="/login">
-                                    <button>로그인</button>
+                                    <button>login</button>
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/signUp">회원가입</Link>
+                                <Link to="/signUp">signUp</Link>
                             </li>
                         </>
                     )}
@@ -51,7 +64,7 @@ const Header = ({login, setLogin, user, setUser}) => {
             </div>
         </header>
 
-);
+    );
 };
 
 export default Header;

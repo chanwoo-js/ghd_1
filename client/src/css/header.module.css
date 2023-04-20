@@ -23,14 +23,62 @@
     .header_contain {position: relative; width: 100%; height: 60px;}
     .logo {position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 50px;  margin-top: 5px;}
 
-    .gnb {position: absolute; top: 0; left: 0; width: 20%; margin: 0; background-color: #007aff;}
+    .gnb {position: absolute; top: 60px; left: 0; width: 100%; margin: 0; background-color: #f8f8f8; z-index: 1 ; animation:scale-up-tl 0.7s cubic-bezier(.39,.575,.565,1.000) both}
     .gnb > ul {text-align: center; font-size: 0; }
     .gnb > ul > li {display: block;  font-size: 16px;}
-    .gnb > ul > li > a {width: 60%; height:50px; line-height: 50px; text-align: center; font-size: 16px; font-weight: 500;}
-
+    .gnb > ul > li > a {width: 100%; height:60px; line-height: 60px; text-align: center; font-size: 16px; font-weight: 500;}
+    .active {display: none;}
 
     .header_right {position: absolute; top: 0; right: 0; font-size: 0;}
-    .header_right > li {display: inline-block; font-size: 16px; font-weight: 600; width: 100px; height: 90px; line-height: 90px;}
-    .header_right > li  button {font-size: 16px; font-weight: 500; width: 100px; height: 90px; line-height: 90px;}
-    .header_right > li > a {font-weight: 500; width: 100px; text-align: center}
+    .header_right > li {display: inline-block; font-size: 16px; font-weight: 600; width: 60px; height: 60px; line-height: 60px;}
+    .header_right > li  button {font-size: 16px; font-weight: 500; width: 60px; height: 60px; line-height: 60px;}
+    .header_right > li > a {font-weight: 500; width: 60px; text-align: center}
+
+    @keyframes scale-up-tl{0%{transform:scale(.5);transform-origin:0 0}100%{transform:scale(1);transform-origin:0 0}}
+
+    .transition_wrapper {
+        position: relative;
+        height: 25px;
+        width: 43px;
+        top: 17px;
+        left: 12px;
+    }
+
+    .element1, .element2, .element3 {
+        transition: 1s;
+        font-size: 20px;
+        height: 1px;
+        width: 80%;
+        background-color: #222222;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-20px);
+    }
+
+    .element1 {
+        top: 0;
+        transform-origin: 0% 50%;
+    }
+
+    .element2 {
+        top: 50%;
+    }
+
+    .element3 {
+        bottom: 0;
+        transform-origin: 0% 50%;
+    }
+
+    .transition_wrapper.hovered .element1 {
+        transform: translateX(-20px) rotate(45deg);
+    }
+
+    .transition_wrapper.hovered .element2 {
+        opacity: 0;
+    }
+
+    .transition_wrapper.hovered .element3 {
+        transform: translateX(-20px) rotate(-45deg);
+    }
+
 }
