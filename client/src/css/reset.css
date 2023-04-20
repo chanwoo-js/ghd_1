@@ -16,10 +16,21 @@ button:hover{cursor: pointer;}
 .hidden{position:absolute;top:-9999999px;left:-99999999px}
 
 /* 모바일 480px 이하 */
-@media (max-width: 430px) {
+@media (max-width: 763px) {
     /* Default css*/
-    body {
-        font-size: 16px;
-    }
+    body {font-size: 16px;}
+    header{display: block}
+    /*mainSlider*/
+    section:nth-child(1) {display: block;}
+    /*roomInfo*/
+    section:nth-child(2) {display: block;}
+    /*withGoodHood*/
+    section:nth-child(3) {display: block;}
+    /*sns*/
+    section:nth-child(4) {display: block;}
+    /*addInfo*/
+    section:nth-child(5) {display: block;}
+    /*location*/
+    section:nth-child(6) {display: block;}
 }
 /* */

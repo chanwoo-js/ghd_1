@@ -10,5 +10,5 @@
 .room_info_contain > div:nth-child(1) > img:nth-child(4){width: 50%; text-align: center; display: block; margin: 0 auto}
 .room_info_contain > div > p {text-align: center; line-height: 2rem; padding: 30px 0;}
 .room_info_contain > div > h4 {padding: 50px 0 30px 0;text-align: center; font-size: 24px}
-.archive_contain {display: flex;flex-wrap: wrap }
-.archive_contain > img {display: inline-block; width: 33%; padding: 10px;}
+.decoration_contain {display: flex;flex-wrap: wrap }
+.decoration_contain > img {display: inline-block; width: 33%; padding: 10px;}

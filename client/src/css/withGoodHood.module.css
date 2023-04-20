@@ -10,4 +10,8 @@
 .swiper_slide > div > div > div {width: 230px; height: 350px;}
 .swiper_slide img {width: 230px; height: 350px; box-shadow: rgba(0, 0, 0, 0.176) 0 16px 10px 0; border-radius: 5px;}
 
+@media (max-width: 768px) {
+    .with_ghd_contain > p {padding: 0 15px 30px;}
+}
+
 

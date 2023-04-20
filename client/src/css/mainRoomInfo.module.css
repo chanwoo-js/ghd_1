@@ -1,0 +1,144 @@
+/* ##########  STUDIO title */
+.room_info_contain { width: 1300px; margin: 0 auto; padding-bottom: 80px;}
+.room_info_contain > h2 {font-size: 45px; line-height: 45px; font-weight: 600; padding: 80px 0 50px 0; text-align: center;}
+
+
+/* ########## room, decoration 분기점 */
+.room_info_contain > div { width: 100%;overflow: hidden;}
+
+.decoration_contain,
+.room_contain {float:left; width: 600px; font-size: 16px;}
+
+.room_contain:nth-child(1) {margin-right: 100px;}
+
+.decoration_contain > h3,
+.room_contain > h3 {border-bottom: 3px solid #602a19; font-size: 30px; line-height: 70px; text-align: center;}
+
+.room_list > li {width: 200px; display: inline-block;}
+.decoration_list > li {width: 300px; display: inline-block;}
+
+.room_list > li > h4,
+.decoration_list > li > h4 { font-size: 20px; height: 60px; line-height: 60px; text-align: center;}
+.active {border-bottom: 3px solid #602a19;}
+
+
+/* ##########  room_list */
+.a_room_list_info,
+.b_room_list_info,
+.c_room_list_info { width: 1300px; font-size: 0; margin-top: 20px;}
+
+.a_room_list_info_left,
+.b_room_list_info_left,
+.c_room_list_info_left {display: inline-block; width: 600px; vertical-align: top; margin-right: 100px; border-radius: 10px; overflow: hidden;}
+
+.a_room_list_info_left > div > div > div,
+.b_room_list_info_left > div > div > div,
+.c_room_list_info_left > div > div > div {width: 600px; height: 600px;}
+
+.a_room_list_info_left img,
+.b_room_list_info_left img,
+.c_room_list_info_left img {width: inherit; height: inherit; object-fit: cover; object-position: center;}
+
+.a_room_list_info_right,
+.b_room_list_info_right,
+.c_room_list_info_right {display: inline-block; width: 600px; vertical-align: top; font-size: 16px;}
+
+.a_room_list_info_right > h5,
+.b_room_list_info_right > h5,
+.c_room_list_info_right > h5 {font-size: 40px; line-height: 40px; padding: 200px 20px 10px;}
+
+.a_room_list_info_right > h6,
+.b_room_list_info_right > h6,
+.c_room_list_info_right > h6 {font-size: 20px; padding: 20px;}
+
+.a_room_list_info_right > p,
+.b_room_list_info_right > p,
+.c_room_list_info_right > p  {font-size: 18px; padding: 20px;}
+
+
+/* ########## decoration  */
+.furniture_decoration_list_info,
+.article_decoration_list_info {position: relative; left: -700px; width: 1300px; font-size: 0; margin-top: 20px; overflow: hidden;}
+
+.furniture_decoration_list_info_left,
+.article_decoration_list_info_left {display: inline-block; width: 600px; vertical-align: top; font-size: 16px; margin-right: 100px;}
+
+.furniture_decoration_list_info_right,
+.article_decoration_list_info_right {display: inline-block; width: 600px; vertical-align: top; border-radius: 10px; overflow: hidden;}
+
+.furniture_decoration_list_info_right > div > div > div,
+.article_decoration_list_info_right > div > div > div {width: 600px; height: 600px; }
+
+.furniture_decoration_list_info_right img,
+.article_decoration_list_info_right img {width: inherit; height: inherit; object-fit: cover; object-position: center;}
+
+.furniture_decoration_list_info_left > h5,
+.article_decoration_list_info_left > h5 {font-size: 40px; line-height: 40px; padding: 200px 20px 10px; text-align: end}
+
+.furniture_decoration_list_info_left > h6,
+.article_decoration_list_info_left > h6 {font-size: 20px; padding: 20px; text-align: end}
+
+.furniture_decoration_list_info_left > p,
+.article_decoration_list_info_left > p {font-size: 18px; padding: 20px; text-align: end}
+
+
+@media (max-width: 768px) {
+    /* ##########  STUDIO title */
+    .room_info_contain { width: 100%; padding: 0 15px;}
+
+    /* ########## room, decoration 분기점 */
+    .room_info_contain > div { width: 100%;}
+
+    .decoration_contain,
+    .room_contain {width: 100%;}
+
+    .room_contain:nth-child(1) {margin: 0;}
+
+    .room_list > li {width: 33.33%;}
+    .decoration_list > li {width: 50%;}
+
+    /* ##########  room_list */
+    .a_room_list_info,
+    .b_room_list_info,
+    .c_room_list_info {width: 100%;}
+
+    .a_room_list_info_left,
+    .b_room_list_info_left,
+    .c_room_list_info_left {width: 100%; margin:0;}
+
+    .a_room_list_info_left > div > div > div,
+    .b_room_list_info_left > div > div > div,
+    .c_room_list_info_left > div > div > div {width: 100%; height: 400px;}
+
+    .a_room_list_info_right,
+    .b_room_list_info_right,
+    .c_room_list_info_right { width: 100%;}
+
+    .a_room_list_info_right > h5,
+    .b_room_list_info_right > h5,
+    .c_room_list_info_right > h5 {font-size: 40px; line-height: 40px; padding: 20px}
+
+
+
+    /* ########## decoration  */
+    .furniture_decoration_list_info,
+    .article_decoration_list_info {left: 0; width: 100%; padding-bottom: 50px;}
+
+    .furniture_decoration_list_info_left,
+    .article_decoration_list_info_left {width: 100%; margin:0;}
+
+    .furniture_decoration_list_info_right,
+    .article_decoration_list_info_right {width: 100%;}
+
+    .furniture_decoration_list_info_right > div > div > div,
+    .article_decoration_list_info_right > div > div > div {width: 100%; height: 400px;}
+
+    .furniture_decoration_list_info_left > h5,
+    .article_decoration_list_info_left > h5 {font-size: 40px; line-height: 40px; padding: 20px; text-align: end}
+
+    .furniture_decoration_list_info_left > h6,
+    .article_decoration_list_info_left > h6 {font-size: 20px; padding: 20px; text-align: end}
+
+    .furniture_decoration_list_info_left > p,
+    .article_decoration_list_info_left > p {font-size: 18px; padding: 20px; text-align: end}
+}

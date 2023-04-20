@@ -10,3 +10,15 @@
 .sns_contain ul li:nth-child(1),.sns_contain ul li:nth-child(2),.sns_contain ul li:nth-child(3),.sns_contain ul li:nth-child(5),.sns_contain ul li:nth-child(6),.sns_contain ul li:nth-child(7){padding-right: 60px; }
 .sns_contain ul a {width: 280px; height: 280px; overflow: hidden; box-shadow: rgba(0, 0, 0, 0.176) 0 16px 48px 0;}
 .sns_contain ul img {object-fit: cover; width: 280px; height: 280px;}
+
+@media (max-width: 768px) {
+    .sns_contain {width: 100%;}
+    .sns_contain > div {text-align: center; padding: 10px 10px}
+    .sns_contain > div > a {line-height: 1.8em;}
+    .sns_contain ul {font-size: 0}
+    .sns_contain ul li {display: inline-block; width: 50%; text-align: center; font-size: 16px; }
+    .sns_contain ul li:nth-child(1),.sns_contain ul li:nth-child(2),.sns_contain ul li:nth-child(3),.sns_contain ul li:nth-child(4) {padding: 10px; }
+    .sns_contain ul li:nth-child(1),.sns_contain ul li:nth-child(2),.sns_contain ul li:nth-child(3),.sns_contain ul li:nth-child(5),.sns_contain ul li:nth-child(6),.sns_contain ul li:nth-child(7){padding: 10px;}
+    .sns_contain ul a {width: 100%; height: 250px; overflow: hidden; box-shadow: rgba(0, 0, 0, 0.176) 0 16px 48px 0;}
+    .sns_contain ul img {object-fit: cover; width: 100%; height: 250px;}
+}

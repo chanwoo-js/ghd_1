@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import style from "../css/roomInfo.module.css";
 
 const RoomInfo = (props) => {
-    const [selectRooom,setSelectRoom] = useState("A")
+    const [selectRoom,setSelectRoom] = useState("A")
 
-    const selectRoom = (value) => {
+    const selectRoomButton = (value) => {
         setSelectRoom(value);
     }
     const aRoomImages = [
@@ -63,66 +63,41 @@ const RoomInfo = (props) => {
         'c_14.jpg',
         'c_15.jpg',
     ];
-    const archiveImages = [
-        'archive_1.jpg',
-        'archive_2.jpg',
-        'archive_3.jpg',
-        'archive_4.jpg',
-        'archive_5.jpg',
-        'archive_6.jpg',
-        'archive_7.jpg',
-        'archive_8.jpg',
-        'archive_9.jpg',
-        'archive_10.jpg',
-        'archive_11.jpg',
-        'archive_12.jpg',
-        'archive_13.jpg',
-        'archive_14.jpg',
-        'archive_15.jpg',
-        'archive_16.jpg',
-        'archive_17.jpg',
-        'archive_18.jpg',
-        'archive_19.jpg',
-        'archive_20.jpg',
-        'archive_21.jpg',
-        'archive_22.jpg',
-        'archive_23.jpg',
-        'archive_24.jpg',
-        'archive_25.jpg',
-        'archive_26.jpg',
-        'archive_27.jpg',
-        'archive_28.jpg',
-        'archive_29.jpg',
-        'archive_30.jpg',
-        'archive_31.jpg',
-        'archive_32.jpg',
-        'archive_33.jpg',
-        'archive_34.jpg',
-        'archive_35.jpg',
-        'archive_36.jpg',
-        'archive_37.jpg',
-        'archive_38.jpg',
-        'archive_39.jpg',
-        'archive_40.jpg',
-        'archive_41.jpg',
-        'archive_42.jpg',
-        'archive_43.jpg',
-        'archive_44.jpg',
-        'archive_45.jpg',
-        'archive_46.jpg',
-        'archive_47.jpg',
-        'archive_48.jpg',
+    const articleIamge = [
+        'article_1.jpg',
+        'article_2.jpg',
+        'article_3.jpg',
+        'article_4.jpg',
+        'article_5.jpg',
+        'article_6.jpg',
+        'article_7.jpg',
+        'article_8.jpg',
+        'article_9.jpg',
+        'article_10.jpg',
+        'article_11.jpg',
+        'article_12.jpg',
+        'article_13.jpg',
+        'article_14.jpg',
+        'article_15.jpg',
+        'article_16.jpg',
+        'article_17.jpg',
+        'article_18.jpg',
+        'article_19.jpg',
+        'article_20.jpg',
+        'article_21.jpg',
+        'article_22.jpg',
+        'article_23.jpg',
     ];
     return (
         <section>
             <div className={style.room_info_contain}>
                 <ul>
-                    <li onClick={() => selectRoom("A")}>A ROOM</li>
-                    <li onClick={() => selectRoom("B")}>B ROOM</li>
-                    <li onClick={() => selectRoom("C")}>C ROOM</li>
-                    <li onClick={() => selectRoom("ARCHIVE")}>ARCHIVE</li>
+                    <li onClick={() => selectRoomButton("A")}>A ROOM</li>
+                    <li onClick={() => selectRoomButton("B")}>B ROOM</li>
+                    <li onClick={() => selectRoomButton("C")}>C ROOM</li>
+                    <li onClick={() => selectRoomButton("DECORATION")}>ARCHIVE</li>
                 </ul>
-                {selectRooom === 'A' &&
+                {selectRoom === 'A' &&
                     <div> {/* A Room info */}
                         <img src={require(`../image/a_room/a_1.jpg`)} alt="img"/>
                         <p>"A ROOM"은 따뜻한 톤의 실내 느낌의 공간입니다<br/>
@@ -152,7 +127,7 @@ const RoomInfo = (props) => {
                             ))
                         }
                     </div>}
-                {selectRooom === 'B' &&
+                {selectRoom === 'B' &&
                     <div>
                         <img src={require(`../image/b_room/b_1.jpg`)} alt="img"/>
                         <p>
@@ -189,7 +164,7 @@ const RoomInfo = (props) => {
                         }
                     </div>
                 }
-                {selectRooom === 'C' &&
+                {selectRoom === 'C' &&
                     <div>
                         <img src={require(`../image/c_room/c_1.jpg`)} alt="img"/>
                         <p>"C ROOM"의 장점은 자유롭게 커스터마이징을 할 수 있다는 것입니다.<br/>
@@ -219,13 +194,13 @@ const RoomInfo = (props) => {
                         }
                     </div>
                 }
-                {selectRooom === 'ARCHIVE' &&
-                    <div className={style.archive_contain}>
+                {selectRoom === 'DECORATION' &&
+                    <div className={style.decoration_contain}>
                         {
-                            archiveImages.map((image, index) => (
+                            articleIamge.map((image, index) => (
                                 <img
                                     key={index}
-                                    src={require(`../image/archives/${image}`)}
+                                    src={require(`../image/article/${image}`)}
                                     alt={`archive img ${index + 1}`}
                                 />
                             ))

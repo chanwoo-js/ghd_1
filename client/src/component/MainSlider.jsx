@@ -2,6 +2,8 @@ import React from 'react';
 import style from "../css/mainSlider.module.css";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Autoplay, EffectFade, Navigation, Pagination} from "swiper";
+import 'swiper/swiper-bundle.min.css';
+import "../css/swiper.css"
 
 const MainSlider = () => {
 

@@ -1,0 +1,21 @@
+/*########## card*/
+.add_info{background-color: #f6f6f6;}
+.add_info_contain {width: 1300px; padding-bottom: 150px; margin: 0 auto;}
+.add_info_contain > h2 {line-height: 1.5em; font-size: 40px; padding-top: 80px; font-weight: 900; text-align: center;}
+.add_info_contain > p {padding: 30px 0 80px 0; line-height: 1.5em; font-size: 18px; text-align: center; color: darkgrey}
+.card_contain {width: 1300px; text-align: center; font-size: 0; }
+.card { margin-right: 125px; display: inline-block; font-size: 16px; width: 350px; border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.176) 20px 20px 30px 0; vertical-align: top; background-color: white}
+.card:nth-child(3) {margin: 0;}
+.card img { padding: 40px 60px 10px; width: inherit; height: inherit; object-fit: cover; object-position: center;}
+.card h3 {font-size: 24px; text-align: center; padding: 10px 0;}
+.card p {font-size: 16px; line-height: 28px; display: inline-block; vertical-align: bottom; padding: 10px 20px 30px; height: 150px;}
+
+@media (max-width: 768px) {
+    /*########## card*/
+    .add_info_contain {width: 100%;}
+    .add_info_contain > p {padding: 30px 15px 40px; line-height: 1.7rem; font-size: 18px; text-align: center; color: darkgrey}
+    .card_contain {width: 100%;}
+    .card {margin: 0 0 30px 0; display: inline-block; font-size: 16px; width: 90%; border-radius: 10px; box-shadow: rgba(0, 0, 0, 0.176) 20px 20px 30px 0; vertical-align: top; background-color: white}
+    .card:nth-child(3) {margin: 0;}
+    .card h3 {font-size: 26px;}
+}
