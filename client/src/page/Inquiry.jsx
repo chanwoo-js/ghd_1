@@ -111,7 +111,7 @@ const Inquiry = ({login}) => {
                         </select>
                     </div>
                 </div>
-                <table>
+                <table className={style.inquiry_table}>
                     <thead>
                     <tr>
                         <th>번호</th>

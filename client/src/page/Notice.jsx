@@ -99,7 +99,7 @@ const Notice = ({login, user}) => {
                         </select>
                     </div>
                 </div>
-                <table>
+                <table className={style.notice_table}>
                     <thead>
                         <tr>
                             <th>번호</th>

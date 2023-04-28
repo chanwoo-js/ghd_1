@@ -1,0 +1,16 @@
+.fc-daygrid-event-harness {height: 14px; line-height: 15px;}
+.fc-event-time {font-size: 10px;}
+.fc-event-title {font-size: 12px;}
+.fc-daygrid-day-events {height: 100px; overflow:hidden}
+.fc .fc-media-screen .fc-direction-ltr .fc-theme-standard{float: left;}
+
+
+/*eventDidMount*/
+.past-event .fc-daygrid-event-dot {
+    border-color: grey;
+}
+
+@media (max-width: 768px) {
+    /*달력 일일 영역*/
+    .fc-daygrid-day-frame.fc-scrollgrid-sync-inner {height:60px; overflow: hidden}
+}

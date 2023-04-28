@@ -5,7 +5,6 @@ import "./css/reset.css";
 import Main from "./page/Main";
 import Login from "./page/Login";
 import SignUp from "./page/SignUp";
-import User from "./page/User";
 import Notice from "./page/Notice";
 import RoomInfo from "./page/RoomInfo";
 import ReservationStatus from "./page/ReservationStatus";
@@ -19,6 +18,7 @@ import InquiryWrite from "./page/inquiryWrite";
 import InquiryBoard from "./page/InquiryBoard";
 import InquiryEdit from "./page/InquiryEdit";
 import {checkSession} from "./hook/checkSession";
+import Profile from "./page/Profile";
 
 
 function App() {
@@ -49,7 +49,7 @@ function App() {
                     <Route path={"/login"} element={<Login setLogin={setLogin} user={user} setUser={setUser} />}></Route>
                     <Route path={"/signUp"} element={<SignUp/>}></Route>
                     <Route path={"/signUp/signUpComplete"} element={<SignUpComplete/>}></Route>
-                    <Route path={"/user"} element={<User/>}></Route>
+                    <Route path={"/profile"} element={<Profile/>}></Route>
                 </Routes>
                 <Footer/>
             </BrowserRouter>

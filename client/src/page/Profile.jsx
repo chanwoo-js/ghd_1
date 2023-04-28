@@ -1,20 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 
-const User = (props) => {
-    const [user, setUser] = useState([]);
+const Profile = ({login, }) => {
 
     useEffect(()=>{
-        const fetchAllUser = async()=>{
+        const profile = async()=>{
             try{
-                const data = (await axios.get(`${process.env.REACT_APP_API_URL}/api/User`)).data
-                console.log(data)
-                setUser(data)
+                const res = (await axios.get(`${process.env.REACT_APP_API_URL}/api/profile`)).data
+                console.log(res.data[0])
             }catch(err){
                 console.log(err)
             }
         };
-        fetchAllUser().then(r => {});
+        profile();
     },[]);
 
     // 삭제하는 핸들러
@@ -31,7 +29,7 @@ const User = (props) => {
         <div>
             <h1>USER 정보</h1>
             <div className={"users"}>
-                {user.map((user)=> (
+                {Profile.map((user)=> (
                     <div className={"user"} key={user.id}>
                         {console.log(user)}
                         <div>{user.name}</div>
@@ -51,4 +49,4 @@ const User = (props) => {
     );
 };
 
-export default User;
+export default Profile;

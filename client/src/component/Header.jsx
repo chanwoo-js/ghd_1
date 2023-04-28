@@ -25,24 +25,25 @@ const Header = ({ login, setLogin, user, setUser }) => {
                         <img src={require("../image/logo/logo.png")} alt="logo_image" />
                     </Link>
                 </h1>
-                <div className={`${style.transition_wrapper} ${isHovered ? style.hovered : ''}`} onClick={handleClick}>
+                <div className={`${style.transition_wrapper} ${isHovered ? style.hovered : ''}`}
+                     onClick={handleClick}>
                     <div className={style.element1}></div>
                     <div className={style.element2}></div>
                     <div className={style.element3}></div>
                 </div>
                 <nav className={`${style.gnb} ${isGnbVisible ? `${style.active}` : ''}`}>
                 <ul>
-                        <li><Link to="/notice">공지사항</Link></li>
-                        <li><Link to="/roomInfo">룸 정보</Link></li>
-                        <li><Link to="/reservationStatus">예약 현황</Link></li>
-                        <li><Link to="/inquiry">문의 게시판</Link></li>
+                        <li><Link to="/notice" onClick={handleClick}>공지사항</Link></li>
+                        <li><Link to="/roomInfo" onClick={handleClick}>룸 정보</Link></li>
+                        <li><Link to="/reservationStatus" onClick={handleClick}>예약 현황</Link></li>
+                        <li><Link to="/inquiry" onClick={handleClick}>문의 게시판</Link></li>
                     </ul>
                 </nav>
                 <ul className={style.header_right}>
                     {login ? (
                         <>
                             <li>
-                                <Link to="/login">{`${user.name} 님`}</Link>
+                                <Link to="/profile">{`${user.name} 님`}</Link>
                             </li>
                             <li>
                                 <button onClick={handleLogout}>로그아웃</button>

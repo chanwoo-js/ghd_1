@@ -49,7 +49,7 @@ const NoticeBoard = ({ login, user }) => {
                             <span className={style.view}>조회수: {noticeBoard.count}</span>
                         </div>
                         <p>{noticeBoard.text_area}</p>
-                        {user.admin === noticeBoard.admin && user.name === noticeBoard.author && login ? (
+                        {user && user.admin === noticeBoard.admin && user.name === noticeBoard.author && login ? (
                             <div className={style.button_contain}>
                                 <button><Link to={`/notice/board/${id}/edit`}>수정하기</Link></button>
                                 <button onClick={deleteBoard}>삭제하기</button>

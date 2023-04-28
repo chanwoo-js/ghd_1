@@ -1,1 +1,33 @@
-.calendar_contain {padding: 150px 0; width: 1300px; margin: 0 auto;}
+.reservation_status_contain {width: 1300px; padding: 150px 0; margin: 0 auto; }
+.reservation_status_contain > div:nth-child(1) { width: 100%; margin: 0 auto; overflow: hidden;}
+
+.reservation_status_modal_contain {position: fixed; top: 0; right: 0; bottom: 0; left: 0; width: 100%;  background-color: rgba(0,0,0,0.5); z-index: 2}
+.reservation_status_modal {position: fixed; top: 50%; right: 50%; left: 50%; bottom: 50%; width: 30%;  border-radius: 15px; box-shadow: rgba(0, 0, 0, 0.5); background-color: white; transform: translate(-50%,-50%); padding: 60px 30px;}
+
+.reservation_status_modal > h2 {text-align: center;}
+.reservation_status_modal > h3 {text-align: center; padding: 10px;}
+.reservation_status_modal > div { overflow: scroll;  overflow-x: hidden;  height:60% }
+.reservation_status_modal > div::-webkit-scrollbar {width: 5px; height: 10px;}
+.reservation_status_modal > div::-webkit-scrollbar-thumb {background-color: #ccc; border-radius: 5px;}
+.reservation_status_modal > div::-webkit-scrollbar-thumb:hover {background-color: #aaa;}
+
+.reservation_info {text-align: center;}
+.reservation_info > span { display: inline-block;}
+.reservation_info > .dot {border: 6px solid darkblue; border-radius: 6px;}
+.reservation_info > h4 {display: inline-block; padding: 0 10px;}
+.reservation_info > .reservation_room {padding: 0 5px;}
+.reservation_info > .reservation_name {padding-left: 5px;}
+
+.reservation_info.past-event > h4,
+.reservation_info.past-event > span {color: gray; text-decoration: line-through;}
+.reservation_info.past-event .dot {border: 6px solid grey}
+
+@media (max-width: 1300px){
+    .reservation_status_modal {width: 80%; height: 65vh;}
+}
+@media (max-width:768px){
+    .reservation_status_contain {width: 100%;}
+    .reservation_status_contain > div:nth-child(1) {width: 95%; height: 480px;}
+    .reservation_status_modal {width: 95%; height: 65vh;}
+    .reservation_status_modal > div { overflow: scroll;  overflow-x: hidden;  height:75% }
+}
